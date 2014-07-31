@@ -37,4 +37,8 @@ public class Subject {
         result = 31 * result + degree.hashCode();
         return result;
     }
+
+    public String getFormattedName() {
+        return name.substring(name.indexOf("-") + 1, name.lastIndexOf("(") - 1);
+    }
 }

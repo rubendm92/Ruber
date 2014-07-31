@@ -73,4 +73,8 @@ public class Teaching {
     public void addProfessor(Professor professor) {
         signatures.put(professor, null);
     }
+
+    public String getFormattedSubjectName() {
+        return subject.getFormattedName();
+    }
 }
