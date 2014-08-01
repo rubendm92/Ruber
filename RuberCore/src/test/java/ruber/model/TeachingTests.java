@@ -1,6 +1,5 @@
 package ruber.model;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Test;
 import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
@@ -53,9 +52,9 @@ public class TeachingTests {
         assertFalse(is2.canBeSigned(LocalTime.of(8, 15)));
     }
 
-    @Ignore
+    @Test
     public void getProfessorsWithTeachingsNow() {
-        ProfessorList resultList = Teachings.longList().getProfessorsWithTeachingsForTime(LocalTime.of(8, 30));
+        ProfessorList resultList = Teachings.longList().getProfessorsWithTeachingsForTime(LocalTime.of(8, 15));
         List<Professor> expectedList = Arrays.asList(Professors.ruben());
         assertEquals(expectedList, resultList);
     }
