@@ -43,4 +43,8 @@ public class Schedule {
     public String toString() {
         return startTime.toString() + "-" + endTime.toString();
     }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
 }

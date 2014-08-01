@@ -1,11 +1,14 @@
 package ruber.model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Teaching {
+
+    private static final int TWO_HOURS = 7200;
 
     private final Subject subject;
     private final Schedule schedule;
@@ -76,5 +79,9 @@ public class Teaching {
 
     public String getFormattedSubjectName() {
         return subject.getFormattedName();
+    }
+
+    public boolean canBeSigned(LocalTime time) {
+        return (Math.abs(schedule.getStartTime().toSecondOfDay() - time.toSecondOfDay()) <= TWO_HOURS);
     }
 }

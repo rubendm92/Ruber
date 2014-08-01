@@ -1,5 +1,6 @@
 package ruber.model;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Test;
 import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
@@ -42,5 +43,20 @@ public class TeachingTests {
     public void getFormattedNameFromSubject() {
         assertEquals("FUNDAMENTOS DE LOS SISTEMAS OPERATIVOS", Teachings.fso().getFormattedSubjectName());
         assertEquals("INGENIERÍA DEL SOFTWARE II", Teachings.is2().getFormattedSubjectName());
+    }
+
+    @Test
+    public void teachingCanBeSignedIfTimeIsTwoHoursBeforeOrAfterStartTime() {
+        Teaching fso = Teachings.fso();
+        Teaching is2 = Teachings.is2();
+        assertTrue(fso.canBeSigned(LocalTime.of(8, 15)));
+        assertFalse(is2.canBeSigned(LocalTime.of(8, 15)));
+    }
+
+    @Ignore
+    public void getProfessorsWithTeachingsNow() {
+        ProfessorList resultList = Teachings.longList().getProfessorsWithTeachingsForTime(LocalTime.of(8, 30));
+        List<Professor> expectedList = Arrays.asList(Professors.ruben());
+        assertEquals(expectedList, resultList);
     }
 }
