@@ -1,6 +1,9 @@
 package ruber.persistence_db;
 
 import ruber.persistence.*;
+import ruber.persistence_db.implementation.DatabaseNotificationSaver;
+import ruber.persistence_db.implementation.DatabaseProfessorsLoader;
+import ruber.persistence_db.implementation.DatabaseSignedTeachingsSaver;
 import ruber.persistence_db.implementation.DatabaseTeachingsLoader;
 import ruber.persistence_db.util.Database;
 import ruber.persistence_db.util.DatabaseProvider;

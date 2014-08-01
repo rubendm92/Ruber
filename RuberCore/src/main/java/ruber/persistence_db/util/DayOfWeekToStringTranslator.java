@@ -20,8 +20,6 @@ public class DayOfWeekToStringTranslator {
         days.put(DayOfWeek.WEDNESDAY, "3.Miércoles");
         days.put(DayOfWeek.THURSDAY, "4.Jueves");
         days.put(DayOfWeek.FRIDAY, "5.Viernes");
-        days.put(DayOfWeek.SATURDAY, "6.Sábado");
-        days.put(DayOfWeek.SUNDAY, "7.Domingo");
     }
     
     public static DayOfWeekToStringTranslator instance() {

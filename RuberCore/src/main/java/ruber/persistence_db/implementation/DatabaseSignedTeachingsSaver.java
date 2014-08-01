@@ -1,4 +1,4 @@
-package ruber.persistence_db;
+package ruber.persistence_db.implementation;
 
 import ruber.persistence.SignedTeachingsSaver;
 import ruber.persistence_db.util.Database;
