@@ -53,9 +53,16 @@ public class TeachingTests {
     }
 
     @Test
-    public void getProfessorsWithTeachingsNow() {
+    public void getProfessorsWithTeachingsAtAGivenTime() {
         ProfessorList resultList = Teachings.longList().getProfessorsWithTeachingsForTime(LocalTime.of(8, 15));
         List<Professor> expectedList = Arrays.asList(Professors.ruben());
+        assertEquals(expectedList, resultList);
+    }
+
+    @Test
+    public void getProfessorsWithTeachingsAtAGivenTimeWhenThereAreTeachingsSigned() {
+        ProfessorList resultList = Teachings.halfSignedList().getProfessorsWithTeachingsForTime(LocalTime.of(10, 15));
+        List<Professor> expectedList = Arrays.asList(Professors.replacement());
         assertEquals(expectedList, resultList);
     }
 }

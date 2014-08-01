@@ -2,6 +2,7 @@ package ruber.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class TeachingList extends ArrayList<Teaching> {
@@ -14,7 +15,13 @@ public class TeachingList extends ArrayList<Teaching> {
 
     public ProfessorList getProfessorsWithTeachingsForTime(LocalTime time) {
         ProfessorList professors = new ProfessorList();
-        teachingsThatCanBeSigned(time).forEach((teaching) -> professors.addAll(teaching.getProfessors()));
+        teachingsThatCanBeSigned(time).forEach((teaching) -> professors.addAll(professorsThatHaveNotSignedYet(teaching)));
+        return professors;
+    }
+
+    private List<Professor> professorsThatHaveNotSignedYet(Teaching teaching) {
+        ProfessorList professors = new ProfessorList();
+        teaching.getSignatures().entrySet().stream().filter(set -> set.getValue() == null).forEach(set -> professors.add(set.getKey()));
         return professors;
     }
 

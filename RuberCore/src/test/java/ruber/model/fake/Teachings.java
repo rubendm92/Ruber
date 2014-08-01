@@ -6,27 +6,10 @@ import java.time.LocalTime;
 
 public class Teachings {
 
-    public static TeachingList shortList() {
-        final TeachingList teachings = new TeachingList();
-        teachings.add(fso());
-        return teachings;
-    }
-
     public static TeachingList longList() {
         final TeachingList teachings = new TeachingList();
         teachings.add(fso());
         teachings.add(is2());
-        return teachings;
-    }
-
-    public static TeachingList signedList() {
-        final TeachingList teachings = new TeachingList();
-        Teaching teaching = fso();
-        teaching.sign(Professors.ruben(), new Signature(Professors.ruben(), LocalTime.now(), new byte[]{}));
-        teachings.add(teaching);
-        teaching = is2();
-        teaching.sign(Professors.replacement(), new Signature(Professors.replacement(), LocalTime.now(), new byte[]{}));
-        teachings.add(teaching);
         return teachings;
     }
 
@@ -36,17 +19,6 @@ public class Teachings {
         teaching.sign(Professors.ruben(), new Signature(Professors.ruben(), LocalTime.now(), new byte[]{}));
         teachings.add(teaching);
         teachings.add(is2());
-        return teachings;
-    }
-
-    public static TeachingList oneReplacementList() {
-        final TeachingList teachings = new TeachingList();
-        Teaching teaching = fso();
-        teaching.sign(Professors.ruben(), new Signature(Professors.replacement(), LocalTime.now(), new byte[]{}));
-        teachings.add(teaching);
-        teaching = is2();
-        teaching.sign(Professors.replacement(), new Signature(Professors.replacement(), LocalTime.now(), new byte[]{}));
-        teachings.add(teaching);
         return teachings;
     }
 
