@@ -4,6 +4,8 @@ import java.time.LocalTime;
 
 public class Schedule {
 
+    private static final int TWO_HOURS = 7200;
+
     private final LocalTime startTime;
     private final LocalTime endTime;
     private final String classroom;
@@ -46,5 +48,9 @@ public class Schedule {
 
     public LocalTime getStartTime() {
         return startTime;
+    }
+
+    public boolean canBeSigned(LocalTime time) {
+        return (Math.abs(getStartTime().toSecondOfDay() - time.toSecondOfDay()) <= TWO_HOURS);
     }
 }

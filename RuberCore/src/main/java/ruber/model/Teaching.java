@@ -8,8 +8,6 @@ import java.util.Map;
 
 public class Teaching {
 
-    private static final int TWO_HOURS = 7200;
-
     private final Subject subject;
     private final Schedule schedule;
     private final String group;
@@ -82,6 +80,12 @@ public class Teaching {
     }
 
     public boolean canBeSigned(LocalTime time) {
-        return (Math.abs(schedule.getStartTime().toSecondOfDay() - time.toSecondOfDay()) <= TWO_HOURS);
+        return schedule.canBeSigned(time);
+    }
+
+    public List<Professor> getProfessorsThatHaveNotSignedYet() {
+        ProfessorList professors = new ProfessorList();
+        signatures.entrySet().stream().filter(set -> set.getValue() == null).forEach(set -> professors.add(set.getKey()));
+        return professors;
     }
 }
