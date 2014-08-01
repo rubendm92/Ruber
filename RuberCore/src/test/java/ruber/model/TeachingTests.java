@@ -13,12 +13,18 @@ import static org.junit.Assert.*;
 
 public class TeachingTests {
 
-    private byte[] fakeSignature = new byte[]{};
+    private final byte[] fakeSignature = new byte[]{};
+    private final Signature rubenSignature = new Signature(Professors.ruben(), LocalTime.of(8, 30), fakeSignature);
+    private final Signature replacementSignature = new Signature(Professors.replacement(), LocalTime.of(8, 30), fakeSignature);
 
     @Test
     public void teachingWasReplaced() {
         Teaching teaching = Teachings.fso();
-        teaching.sign(Professors.ruben(), new Signature(Professors.replacement(), LocalTime.of(8, 30), fakeSignature));
+        teaching.sign(Professors.ruben(), replacementSignature);
+        assertTeachingWasReplaced(teaching);
+    }
+
+    private void assertTeachingWasReplaced(Teaching teaching) {
         for (Map.Entry<Professor,Signature> entry : teaching.getSignatures().entrySet())
             assertFalse(entry.getKey().equals(entry.getValue().getProfessor()));
     }
@@ -26,7 +32,11 @@ public class TeachingTests {
     @Test
     public void teachingWasGivenByOneOfHisProfessors() {
         Teaching teaching = Teachings.fso();
-        teaching.sign(Professors.ruben(), new Signature(Professors.ruben(), LocalTime.of(8, 30), fakeSignature));
+        teaching.sign(Professors.ruben(), rubenSignature);
+        assertTeachingWasGivenByItsProfessor(teaching);
+    }
+
+    private void assertTeachingWasGivenByItsProfessor(Teaching teaching) {
         for (Map.Entry<Professor,Signature> entry : teaching.getSignatures().entrySet())
             assertTrue(entry.getKey().equals(entry.getValue().getProfessor()));
     }
@@ -46,10 +56,8 @@ public class TeachingTests {
 
     @Test
     public void teachingCanBeSignedIfTimeIsTwoHoursBeforeOrAfterStartTime() {
-        Teaching fso = Teachings.fso();
-        Teaching is2 = Teachings.is2();
-        assertTrue(fso.canBeSigned(LocalTime.of(8, 15)));
-        assertFalse(is2.canBeSigned(LocalTime.of(8, 15)));
+        assertTrue(Teachings.fso().canBeSigned(LocalTime.of(8, 15)));
+        assertFalse(Teachings.is2().canBeSigned(LocalTime.of(8, 15)));
     }
 
     @Test
