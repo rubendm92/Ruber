@@ -43,7 +43,7 @@ public class SignatureSetter extends DataLoader<Void> {
         preparedStatement().setString(2, teaching.getDegree());
         preparedStatement().setString(3, teaching.getSubjectName());
         preparedStatement().setString(4, teaching.getGroup());
-        preparedStatement().setString(5, teaching.getSchedule().toString());
+        preparedStatement().setString(5, teaching.getStringSchedule());
         preparedStatement().setString(6, teaching.getClassroom());
         preparedStatement().setString(7, professor.getName());
     }

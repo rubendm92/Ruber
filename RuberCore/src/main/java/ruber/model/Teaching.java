@@ -33,8 +33,8 @@ public class Teaching {
         return schedule.getClassroom();
     }
 
-    public Schedule getSchedule() {
-        return schedule;
+    public String getStringSchedule() {
+        return schedule.toString();
     }
 
     public List<Professor> getProfessors() {
@@ -45,32 +45,8 @@ public class Teaching {
         signatures.replace(professor, signature);
     }
 
-    public Map<Professor, Signature> getSignatures() {
-        return signatures;
-    }
-
     public boolean isGivenBy(Professor professor) {
         return signatures.keySet().contains(professor);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return isTeaching(object) && teachingsAreEquals((Teaching) object);
-    }
-
-    private boolean isTeaching(Object object) {
-        return (object != null && getClass() == object.getClass());
-    }
-
-    private boolean teachingsAreEquals(Teaching teaching) {
-        return ((group.equals(teaching.group)) && (schedule.equals(teaching.schedule)) && (subject.equals(teaching.subject)));
-    }
-
-    @Override
-    public int hashCode() {
-        int result = subject.hashCode();
-        result = 31 * (31 * result + group.hashCode()) + schedule.hashCode();
-        return result;
     }
 
     public void addProfessor(Professor professor) {
@@ -83,6 +59,10 @@ public class Teaching {
 
     public boolean canBeSigned(LocalTime time) {
         return schedule.canBeSigned(time);
+    }
+
+    public byte[] getSignatureBytes(Professor professor) {
+        return signatures.get(professor).getSignature();
     }
 
     public List<Professor> getProfessorsThatHaveNotSignedYet() {
@@ -107,7 +87,23 @@ public class Teaching {
         return signatures.entrySet().stream().filter(set -> set.getValue() != null && set.getValue().getProfessor().equals(professor)).findFirst();
     }
 
-    public byte[] getSignatureBytes(Professor professor) {
-        return signatures.get(professor).getSignature();
+    @Override
+    public boolean equals(Object object) {
+        return isTeaching(object) && teachingsAreEquals((Teaching) object);
+    }
+
+    private boolean isTeaching(Object object) {
+        return (object != null && getClass() == object.getClass());
+    }
+
+    private boolean teachingsAreEquals(Teaching teaching) {
+        return ((group.equals(teaching.group)) && (schedule.equals(teaching.schedule)) && (subject.equals(teaching.subject)));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = subject.hashCode();
+        result = 31 * (31 * result + group.hashCode()) + schedule.hashCode();
+        return result;
     }
 }

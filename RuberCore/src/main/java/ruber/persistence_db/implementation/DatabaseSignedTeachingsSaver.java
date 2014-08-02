@@ -45,7 +45,7 @@ public class DatabaseSignedTeachingsSaver extends DataSaver implements SignedTea
     protected void setStatementValues() throws SQLException {
         preparedStatement().setString(1, getIp());
         preparedStatement().setDate(2, Date.valueOf(LocalDate.now()));
-        preparedStatement().setString(3, currentTeaching.getSchedule().toString());
+        preparedStatement().setString(3, currentTeaching.getStringSchedule());
         preparedStatement().setString(4, currentTeaching.getProfessorForWhomSigned(professor).getName());
         preparedStatement().setString(5, currentTeaching.getDegree());
         preparedStatement().setString(6, currentTeaching.getSubjectName());

@@ -38,7 +38,7 @@ public class ProfessorSetter extends DataLoader<Void> {
         preparedStatement().setString(3, teaching.getDegree());
         preparedStatement().setString(4, teaching.getSubjectName());
         preparedStatement().setString(5, teaching.getGroup());
-        preparedStatement().setString(6, teaching.getSchedule().toString());
+        preparedStatement().setString(6, teaching.getStringSchedule());
         preparedStatement().setString(7, teaching.getClassroom());
     }
 

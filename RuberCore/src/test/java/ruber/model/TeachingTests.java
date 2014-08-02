@@ -12,20 +12,8 @@ import static org.junit.Assert.*;
 
 public class TeachingTests {
 
-    private final byte[] fakeSignature = new byte[]{};
-    private final Signature rubenSignature = new Signature(Professors.ruben(), LocalTime.of(8, 30), fakeSignature);
-    private final Signature replacementSignature = new Signature(Professors.replacement(), LocalTime.of(8, 30), fakeSignature);
-
-    @Test
-    public void teachingWasReplaced() {
-        Teaching teaching = Teachings.fso();
-        teaching.sign(Professors.ruben(), replacementSignature);
-        assertTeachingWasReplaced(teaching);
-    }
-
-    private void assertTeachingWasReplaced(Teaching teaching) {
-        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.replacement()));
-    }
+    private final Signature rubenSignature = new Signature(Professors.ruben(), LocalTime.of(8, 30), new byte[]{});
+    private final Signature replacementSignature = new Signature(Professors.replacement(), LocalTime.of(8, 30), new byte[]{});
 
     @Test
     public void teachingWasGivenByOneOfHisProfessors() {
@@ -36,6 +24,17 @@ public class TeachingTests {
 
     private void assertTeachingWasGivenByItsProfessor(Teaching teaching) {
         assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.ruben()));
+    }
+
+    @Test
+    public void teachingWasReplaced() {
+        Teaching teaching = Teachings.fso();
+        teaching.sign(Professors.ruben(), replacementSignature);
+        assertTeachingWasReplaced(teaching);
+    }
+
+    private void assertTeachingWasReplaced(Teaching teaching) {
+        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.replacement()));
     }
 
     @Test
