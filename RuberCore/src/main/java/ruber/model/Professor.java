@@ -33,4 +33,8 @@ public class Professor {
     public int hashCode() {
         return dni.hashCode();
     }
+
+    public String getDni() {
+        return dni;
+    }
 }
