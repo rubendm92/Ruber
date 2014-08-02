@@ -108,4 +108,8 @@ public class Teaching {
     private Optional<Map.Entry<Professor, Signature>> getFirstEntry(Professor professor) {
         return signatures.entrySet().stream().filter(set -> set.getKey().equals(professor)).findFirst();
     }
+
+    public byte[] getSignatureBytes(Professor professor) {
+        return signatures.get(professor).getSignature();
+    }
 }
