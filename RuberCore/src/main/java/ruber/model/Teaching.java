@@ -1,10 +1,7 @@
 package ruber.model;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Teaching {
 
@@ -58,16 +55,21 @@ public class Teaching {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null || getClass() != object.getClass()) return false;
-        Teaching teaching = (Teaching) object;
+        return isTeaching(object) && teachingsAreEquals((Teaching) object);
+    }
+
+    private boolean isTeaching(Object object) {
+        return (object != null && getClass() == object.getClass());
+    }
+
+    private boolean teachingsAreEquals(Teaching teaching) {
         return ((group.equals(teaching.group)) && (schedule.equals(teaching.schedule)) && (subject.equals(teaching.subject)));
     }
 
     @Override
     public int hashCode() {
         int result = subject.hashCode();
-        result = 31 * result + schedule.hashCode();
-        result = 31 * result + group.hashCode();
+        result = 31 * (31 * result + group.hashCode()) + schedule.hashCode();
         return result;
     }
 
@@ -87,5 +89,23 @@ public class Teaching {
         ProfessorList professors = new ProfessorList();
         signatures.entrySet().stream().filter(set -> set.getValue() == null).forEach(set -> professors.add(set.getKey()));
         return professors;
+    }
+
+    public Professor getProfessorWhoSignedFor(Professor professor) {
+        if (teachingWasSignedBy(professor))
+            return getProfessor(getFirstEntry(professor));
+        return null;
+    }
+
+    private boolean teachingWasSignedBy(Professor professor) {
+        return getFirstEntry(professor).get().getValue() != null;
+    }
+
+    private Professor getProfessor(Optional<Map.Entry<Professor, Signature>> entry) {
+        return entry.get().getValue().getProfessor();
+    }
+
+    private Optional<Map.Entry<Professor, Signature>> getFirstEntry(Professor professor) {
+        return signatures.entrySet().stream().filter(set -> set.getKey().equals(professor)).findFirst();
     }
 }

@@ -66,4 +66,11 @@ public class TeachingTests {
         List<Professor> expectedList = Arrays.asList(Professors.replacement());
         assertEquals(expectedList, resultList);
     }
+
+    @Test
+    public void givenAProfessorAndATeachingGetTheProfessorForWhomHeSigned() {
+        Teaching teaching = Teachings.fso();
+        teaching.sign(Professors.ruben(), replacementSignature);
+        assertEquals(Professors.replacement(), teaching.getProfessorWhoSignedFor(Professors.ruben()));
+    }
 }
