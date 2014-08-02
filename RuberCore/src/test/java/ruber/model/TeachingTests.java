@@ -7,7 +7,6 @@ import ruber.model.fake.Teachings;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -25,8 +24,7 @@ public class TeachingTests {
     }
 
     private void assertTeachingWasReplaced(Teaching teaching) {
-        for (Map.Entry<Professor,Signature> entry : teaching.getSignatures().entrySet())
-            assertFalse(entry.getKey().equals(entry.getValue().getProfessor()));
+        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.replacement()));
     }
 
     @Test
@@ -37,8 +35,7 @@ public class TeachingTests {
     }
 
     private void assertTeachingWasGivenByItsProfessor(Teaching teaching) {
-        for (Map.Entry<Professor,Signature> entry : teaching.getSignatures().entrySet())
-            assertTrue(entry.getKey().equals(entry.getValue().getProfessor()));
+        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.ruben()));
     }
 
     @Test
@@ -65,12 +62,5 @@ public class TeachingTests {
         ProfessorList resultList = Teachings.halfSignedList().getProfessorsWithTeachingsForTime(LocalTime.of(10, 15));
         List<Professor> expectedList = Arrays.asList(Professors.replacement());
         assertEquals(expectedList, resultList);
-    }
-
-    @Test
-    public void givenAProfessorAndATeachingGetTheProfessorForWhomHeSigned() {
-        Teaching teaching = Teachings.fso();
-        teaching.sign(Professors.ruben(), replacementSignature);
-        assertEquals(Professors.replacement(), teaching.getProfessorWhoSignedFor(Professors.ruben()));
     }
 }

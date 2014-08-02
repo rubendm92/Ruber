@@ -46,7 +46,7 @@ public class DatabaseSignedTeachingsSaver extends DataSaver implements SignedTea
         preparedStatement().setString(1, getIp());
         preparedStatement().setDate(2, Date.valueOf(LocalDate.now()));
         preparedStatement().setString(3, currentTeaching.getSchedule().toString());
-        preparedStatement().setString(4, currentTeaching.getProfessorWhoSignedFor(professor).getName());
+        preparedStatement().setString(4, currentTeaching.getProfessorForWhomSigned(professor).getName());
         preparedStatement().setString(5, currentTeaching.getDegree());
         preparedStatement().setString(6, currentTeaching.getSubjectName());
         preparedStatement().setString(7, currentTeaching.getGroup());

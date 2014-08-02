@@ -91,22 +91,20 @@ public class Teaching {
         return professors;
     }
 
-    public Professor getProfessorWhoSignedFor(Professor professor) {
-        if (teachingWasSignedBy(professor))
-            return getProfessor(getFirstEntry(professor));
-        return null;
-    }
-
-    private boolean teachingWasSignedBy(Professor professor) {
-        return getFirstEntry(professor).get().getValue() != null;
+    public Professor getProfessorForWhomSigned(Professor professor) {
+        return (teachingWasSignedBy(professor) ? getProfessor(getFirstEntry(professor)) : null);
     }
 
     private Professor getProfessor(Optional<Map.Entry<Professor, Signature>> entry) {
-        return entry.get().getValue().getProfessor();
+        return entry.get().getKey();
+    }
+
+    private boolean teachingWasSignedBy(Professor professor) {
+        return getFirstEntry(professor).isPresent();
     }
 
     private Optional<Map.Entry<Professor, Signature>> getFirstEntry(Professor professor) {
-        return signatures.entrySet().stream().filter(set -> set.getKey().equals(professor)).findFirst();
+        return signatures.entrySet().stream().filter(set -> set.getValue() != null && set.getValue().getProfessor().equals(professor)).findFirst();
     }
 
     public byte[] getSignatureBytes(Professor professor) {
