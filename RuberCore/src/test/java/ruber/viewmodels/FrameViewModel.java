@@ -1,6 +1,7 @@
 package ruber.viewmodels;
 
 import ruber.model.Professor;
+import ruber.model.ProfessorList;
 import ruber.model.TeachingList;
 
 public class FrameViewModel {
@@ -18,5 +19,8 @@ public class FrameViewModel {
 
     public String getDni() {
         return dni;
+    }
+
+    public void showProfessors(ProfessorList professors) {
     }
 }

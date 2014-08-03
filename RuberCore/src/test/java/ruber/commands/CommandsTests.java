@@ -28,4 +28,12 @@ public class CommandsTests {
         verify(frame).initSession(Mockito.any());
         verify(frame).showTeachingList(Mockito.any());
     }
+
+    @Test
+    public void executingShowProfessorsCommandShouldShowAllProfessorsWithTeachingNow() {
+        FrameViewModel frame = mock(FrameViewModel.class);
+        Command command = new ShowProfessorsCommand(frame, new TeachingList());
+        command.execute();
+        verify(frame).showProfessors(Mockito.any());
+    }
 }
