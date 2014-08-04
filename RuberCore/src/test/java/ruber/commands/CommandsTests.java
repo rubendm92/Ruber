@@ -1,5 +1,6 @@
 package ruber.commands;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import ruber.model.ProfessorList;
@@ -12,9 +13,15 @@ import static org.mockito.Mockito.verify;
 
 public class CommandsTests {
 
+    private FrameViewModel frame;
+
+    @Before
+    public void setUp() {
+        frame = mock(FrameViewModel.class);
+    }
+
     @Test
     public void executingClearFrameCommandShouldCallToClearFrameOnFrameViewModel() {
-        FrameViewModel frame = mock(FrameViewModel.class);
         Command command = new ClearFrameCommand(frame);
         command.execute();
         verify(frame).clear();
@@ -22,18 +29,24 @@ public class CommandsTests {
 
     @Test
     public void executingLoadProfessorCommandShouldShowProfessorAndTeachingsForHim() {
-        FrameViewModel frame = mock(FrameViewModel.class);
         Command command = new LoadProfessorCommand(frame, new ProfessorList(),new TeachingList());
         command.execute();
         verify(frame).initSession(Mockito.any());
-        verify(frame).showTeachingList(Mockito.any());
+        verify(frame).showTeachings(Mockito.any());
     }
 
     @Test
     public void executingShowProfessorsCommandShouldShowAllProfessorsWithTeachingNow() {
-        FrameViewModel frame = mock(FrameViewModel.class);
         Command command = new ShowProfessorsCommand(frame, new TeachingList());
         command.execute();
         verify(frame).showProfessors(Mockito.any());
+    }
+
+    @Test
+    public void executingShowTeachingsToReplaceCommandShouldShowAllTeachingsUnsignedForAProfessor() {
+        Command command = new ShowTeachingsToReplaceCommand(frame, new TeachingList());
+        command.execute();
+        verify(frame).showProfessorToReplace();
+        verify(frame).showTeachings(Mockito.any());
     }
 }

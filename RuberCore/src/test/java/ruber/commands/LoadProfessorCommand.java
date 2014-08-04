@@ -21,7 +21,7 @@ public class LoadProfessorCommand implements Command {
     @Override
     public void execute() {
         frame.initSession(professor());
-        frame.showTeachingList(teachings());
+        frame.showTeachings(teachings());
     }
 
     private Professor professor() {

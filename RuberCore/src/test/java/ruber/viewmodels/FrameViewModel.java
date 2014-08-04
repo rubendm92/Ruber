@@ -7,6 +7,7 @@ import ruber.model.TeachingList;
 public class FrameViewModel {
 
     private String dni;
+    private Professor professorToReplace;
 
     public void clear() {
     }
@@ -14,7 +15,7 @@ public class FrameViewModel {
     public void initSession(Professor professor) {
     }
 
-    public void showTeachingList(TeachingList teachings) {
+    public void showTeachings(TeachingList teachings) {
     }
 
     public String getDni() {
@@ -22,5 +23,12 @@ public class FrameViewModel {
     }
 
     public void showProfessors(ProfessorList professors) {
+    }
+
+    public void showProfessorToReplace() {
+    }
+
+    public Professor getProfessorToReplace() {
+        return professorToReplace;
     }
 }
