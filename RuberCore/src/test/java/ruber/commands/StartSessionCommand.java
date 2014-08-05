@@ -6,13 +6,13 @@ import ruber.model.TeachingList;
 import ruber.view.Command;
 import ruber.viewmodels.FrameViewModel;
 
-public class LoadProfessorCommand implements Command {
+public class StartSessionCommand implements Command {
 
     private final FrameViewModel frame;
     private final ProfessorList professors;
     private final TeachingList teachings;
 
-    public LoadProfessorCommand(FrameViewModel frame, ProfessorList professors, TeachingList teachings) {
+    public StartSessionCommand(FrameViewModel frame, ProfessorList professors, TeachingList teachings) {
         this.frame = frame;
         this.professors = professors;
         this.teachings = teachings;

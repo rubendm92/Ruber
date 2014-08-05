@@ -21,15 +21,15 @@ public class CommandsTests {
     }
 
     @Test
-    public void executingClearFrameCommandShouldCallToClearFrameOnFrameViewModel() {
-        Command command = new ClearFrameCommand(frame);
+    public void executingCloseSessionCommandShouldCallToClearFrame() {
+        Command command = new CloseSessionCommand(frame);
         command.execute();
         verify(frame).clear();
     }
 
     @Test
-    public void executingLoadProfessorCommandShouldShowProfessorAndTeachingsForHim() {
-        Command command = new LoadProfessorCommand(frame, new ProfessorList(),new TeachingList());
+    public void executingStartSessionCommandShouldShowProfessorAndTeachingsForHim() {
+        Command command = new StartSessionCommand(frame, new ProfessorList(),new TeachingList());
         command.execute();
         verify(frame).initSession(Mockito.any());
         verify(frame).showTeachings(Mockito.any());
