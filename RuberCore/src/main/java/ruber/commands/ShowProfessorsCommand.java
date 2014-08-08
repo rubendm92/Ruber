@@ -1,6 +1,5 @@
 package ruber.commands;
 
-import ruber.model.ProfessorList;
 import ruber.model.TeachingList;
 import ruber.view.Command;
 import ruber.viewmodels.FrameViewModel;
@@ -19,7 +18,6 @@ public class ShowProfessorsCommand implements Command {
 
     @Override
     public void execute() {
-        ProfessorList professorsWithTeachingNow = teachings.getProfessorsWithTeachingsForTime(LocalTime.now());
-        frame.showProfessors(professorsWithTeachingNow);
+        frame.showProfessors(teachings.getProfessorsWithTeachingsForTime(LocalTime.now()));
     }
 }

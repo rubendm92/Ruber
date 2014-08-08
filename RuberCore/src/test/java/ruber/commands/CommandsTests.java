@@ -3,7 +3,6 @@ package ruber.commands;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ruber.model.TeachingList;
 import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
 import ruber.persistence.SignedTeachingsSaver;
@@ -39,9 +38,9 @@ public class CommandsTests {
 
     @Test
     public void executingShowProfessorsCommandShouldShowAllProfessorsWithTeachingNow() {
-        Command command = new ShowProfessorsCommand(frame, new TeachingList());
+        Command command = new ShowProfessorsCommand(frame, Teachings.nowList());
         command.execute();
-        verify(frame).showProfessors(Mockito.any());
+        verify(frame).showProfessors(Professors.rubenList());
     }
 
     @Test

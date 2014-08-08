@@ -34,6 +34,12 @@ public class Teachings {
         return teachings;
     }
 
+    public static TeachingList nowList() {
+        final TeachingList teachings = new TeachingList();
+        teachings.add(Teachings.teachingNow());
+        return teachings;
+    }
+
     public static Teaching fso() {
         final Teaching teaching = new Teaching(Subjects.fso(), Schedules.fso(), "Pr. Laboratorio 01.00.04");
         teaching.addProfessor(Professors.ruben());
@@ -43,6 +49,12 @@ public class Teachings {
     public static Teaching is2() {
         final Teaching teaching = new Teaching(Subjects.is2(), Schedules.is2(), "Pr. Aula 01.01");
         teaching.addProfessor(Professors.replacement());
+        return teaching;
+    }
+
+    public static Teaching teachingNow() {
+        final Teaching teaching = new Teaching(Subjects.fso(), Schedules.now(), "Pr. Laboratorio 01.00.04");
+        teaching.addProfessor(Professors.ruben());
         return teaching;
     }
 }

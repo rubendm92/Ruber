@@ -13,4 +13,7 @@ public class Schedules {
     public static Schedule is2() {
         return new Schedule(LocalTime.of(10, 30), LocalTime.of(12, 30), "AULA 1-2");
     }
+    public static Schedule now() {
+        return new Schedule(LocalTime.now().plusMinutes(30), LocalTime.now().plusMinutes(150), "AULA 1-2");
+    }
 }

@@ -6,10 +6,16 @@ import ruber.model.ProfessorList;
 public class Professors {
 
     public static ProfessorList list() {
-        ProfessorList list = new ProfessorList();
-        list.add(ruben());
-        list.add(replacement());
-        return list;
+        ProfessorList professors = new ProfessorList();
+        professors.add(ruben());
+        professors.add(replacement());
+        return professors;
+    }
+
+    public static ProfessorList rubenList() {
+        final ProfessorList professors = new ProfessorList();
+        professors.add(Professors.ruben());
+        return professors;
     }
 
     public static Professor ruben() {
