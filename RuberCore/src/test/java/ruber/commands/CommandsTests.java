@@ -3,8 +3,8 @@ package ruber.commands;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ruber.model.ProfessorList;
 import ruber.model.TeachingList;
+import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
 import ruber.persistence.SignedTeachingsSaver;
 import ruber.view.Command;
@@ -30,10 +30,11 @@ public class CommandsTests {
 
     @Test
     public void executingStartSessionCommandShouldShowProfessorAndTeachingsForHim() {
-        Command command = new StartSessionCommand(frame, new ProfessorList(),new TeachingList());
+        when(frame.getDni()).thenReturn("44739382");
+        Command command = new StartSessionCommand(frame, Professors.list(),Teachings.longList());
         command.execute();
-        verify(frame).initSession(Mockito.any());
-        verify(frame).showTeachings(Mockito.any());
+        verify(frame).initSession(Professors.ruben());
+        verify(frame).showTeachings(Teachings.fsoList());
     }
 
     @Test

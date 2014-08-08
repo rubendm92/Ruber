@@ -22,6 +22,12 @@ public class Teachings {
         return teachings;
     }
 
+    public static TeachingList fsoList() {
+        final TeachingList teachings = new TeachingList();
+        teachings.add(fso());
+        return teachings;
+    }
+
     public static Teaching fso() {
         final Teaching teaching = new Teaching(Subjects.fso(), Schedules.fso(), "Pr. Laboratorio 01.00.04");
         teaching.addProfessor(Professors.ruben());
