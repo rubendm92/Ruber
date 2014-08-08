@@ -46,10 +46,11 @@ public class CommandsTests {
 
     @Test
     public void executingShowTeachingsToReplaceCommandShouldShowAllTeachingsUnsignedForAProfessor() {
-        Command command = new ShowTeachingsToReplaceCommand(frame, new TeachingList());
+        when(frame.getProfessorToReplace()).thenReturn(Professors.replacement());
+        Command command = new ShowTeachingsToReplaceCommand(frame, Teachings.longList());
         command.execute();
         verify(frame).showProfessorToReplace();
-        verify(frame).showTeachings(Mockito.any());
+        verify(frame).showTeachings(Teachings.is2List());
     }
 
     @Test
