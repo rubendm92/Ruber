@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class TeachingTests {
@@ -16,38 +17,30 @@ public class TeachingTests {
     private final Signature replacementSignature = new Signature(Professors.replacement(), LocalTime.of(8, 30), new byte[]{});
 
     @Test
-    public void teachingWasGivenByOneOfHisProfessors() {
+    public void teachingWasGivenByItsProfessor() {
         Teaching teaching = Teachings.fso();
         teaching.sign(Professors.ruben(), rubenSignature);
-        assertTeachingWasGivenByItsProfessor(teaching);
-    }
-
-    private void assertTeachingWasGivenByItsProfessor(Teaching teaching) {
-        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.ruben()));
+        assertThat(teaching.getProfessorForWhomSigned(Professors.ruben()), is(Professors.ruben()));
     }
 
     @Test
     public void teachingWasReplaced() {
         Teaching teaching = Teachings.fso();
         teaching.sign(Professors.ruben(), replacementSignature);
-        assertTeachingWasReplaced(teaching);
-    }
-
-    private void assertTeachingWasReplaced(Teaching teaching) {
-        assertEquals(Professors.ruben(), teaching.getProfessorForWhomSigned(Professors.replacement()));
+        assertThat(teaching.getProfessorForWhomSigned(Professors.replacement()), is(Professors.ruben()));
     }
 
     @Test
     public void getTeachingsGivenByProfessor() {
         TeachingList resultList = Teachings.longList().getTeachingsForProfessor(Professors.ruben());
         List<Teaching> expectedList = Arrays.asList(Teachings.fso());
-        assertEquals(expectedList, resultList);
+        assertThat(resultList, is(expectedList));
     }
 
     @Test
     public void getFormattedNameFromSubject() {
-        assertEquals("FUNDAMENTOS DE LOS SISTEMAS OPERATIVOS", Teachings.fso().getFormattedSubjectName());
-        assertEquals("INGENIERÍA DEL SOFTWARE II", Teachings.is2().getFormattedSubjectName());
+        assertThat(Teachings.fso().getFormattedSubjectName(), is("FUNDAMENTOS DE LOS SISTEMAS OPERATIVOS"));
+        assertThat(Teachings.is2().getFormattedSubjectName(), is("INGENIERÍA DEL SOFTWARE II"));
     }
 
     @Test
@@ -60,6 +53,6 @@ public class TeachingTests {
     public void getProfessorsWithTeachingsAtAGivenTimeWhenThereAreTeachingsSigned() {
         ProfessorList resultList = Teachings.halfSignedList().getProfessorsWithTeachingsForTime(LocalTime.of(10, 15));
         List<Professor> expectedList = Arrays.asList(Professors.replacement());
-        assertEquals(expectedList, resultList);
+        assertThat(resultList, is(expectedList));
     }
 }

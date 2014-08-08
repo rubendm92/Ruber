@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.Month;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 public class DayOfWeekToStringTranslatorTests {
 
@@ -17,10 +18,10 @@ public class DayOfWeekToStringTranslatorTests {
 
     @Test
     public void getDayWithStringGivingDayOfWeek() {
-        assertEquals("1.Lunes", DayOfWeekToStringTranslator.instance().dateToDayString(MONDAY));
-        assertEquals("2.Martes", DayOfWeekToStringTranslator.instance().dateToDayString(TUESDAY));
-        assertEquals("3.Miércoles", DayOfWeekToStringTranslator.instance().dateToDayString(WEDNESDAY));
-        assertEquals("4.Jueves", DayOfWeekToStringTranslator.instance().dateToDayString(THURSDAY));
-        assertEquals("5.Viernes", DayOfWeekToStringTranslator.instance().dateToDayString(FRIDAY));
+        assertThat(DayOfWeekToStringTranslator.instance().dateToDayString(MONDAY), is("1.Lunes"));
+        assertThat(DayOfWeekToStringTranslator.instance().dateToDayString(TUESDAY), is("2.Martes"));
+        assertThat(DayOfWeekToStringTranslator.instance().dateToDayString(WEDNESDAY), is("3.Miércoles"));
+        assertThat(DayOfWeekToStringTranslator.instance().dateToDayString(THURSDAY), is("4.Jueves"));
+        assertThat(DayOfWeekToStringTranslator.instance().dateToDayString(FRIDAY), is("5.Viernes"));
     }
 }
