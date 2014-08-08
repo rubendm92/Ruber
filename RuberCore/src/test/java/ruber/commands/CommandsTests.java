@@ -5,11 +5,12 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import ruber.model.ProfessorList;
 import ruber.model.TeachingList;
+import ruber.model.fake.Teachings;
+import ruber.persistence.SignedTeachingsSaver;
 import ruber.view.Command;
 import ruber.viewmodels.FrameViewModel;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CommandsTests {
 
@@ -48,5 +49,18 @@ public class CommandsTests {
         command.execute();
         verify(frame).showProfessorToReplace();
         verify(frame).showTeachings(Mockito.any());
+    }
+
+    @Test
+    public void executingSignTeachingsCommandShouldSignTeachingsSelected() {
+        final SignedTeachingsSaver saver = mock(SignedTeachingsSaver.class);
+        when(frame.getSelectedTeachings()).thenReturn(Teachings.longList());
+        Command command = new SignTeachingsCommand(frame, saver);
+        command.execute();
+        verify(frame, atLeast(1)).getSelectedTeachings();
+        verify(frame, atLeast(1)).getProfessorSelected();
+        verify(frame, atLeast(1)).getProfessorFromSession();
+        verify(frame, atLeast(1)).getSignature();
+        verify(saver, atLeast(1)).save(Mockito.any(), Mockito.any());
     }
 }

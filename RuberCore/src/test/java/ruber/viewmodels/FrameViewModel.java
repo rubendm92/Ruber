@@ -8,6 +8,10 @@ public class FrameViewModel {
 
     private String dni;
     private Professor professorToReplace;
+    private Professor professor;
+    private TeachingList selectedTeachings;
+    private byte[] signature;
+    private Professor professorSelected;
 
     public void clear() {
     }
@@ -30,5 +34,21 @@ public class FrameViewModel {
 
     public Professor getProfessorToReplace() {
         return professorToReplace;
+    }
+
+    public Professor getProfessorFromSession() {
+        return professor;
+    }
+
+    public TeachingList getSelectedTeachings() {
+        return selectedTeachings;
+    }
+
+    public byte[] getSignature() {
+        return signature;
+    }
+
+    public Professor getProfessorSelected() {
+        return professorSelected;
     }
 }
