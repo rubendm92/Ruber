@@ -15,6 +15,6 @@ public class Selection {
     }
 
     public TeachingList getSelectedTeachings() {
-        return teachings.stream().filter(teaching -> teaching.isSelected()).collect(Collectors.toCollection(() -> new TeachingList()));
+        return teachings.stream().filter(Teaching::isSelected).collect(Collectors.toCollection(() -> new TeachingList()));
     }
 }
