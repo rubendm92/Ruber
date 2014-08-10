@@ -16,7 +16,7 @@ public class SelectionTests {
         final Teaching is2 = new Teaching(Teachings.is2());
         selection.showTeachings(teachings(fso, is2));
         is2.unselect();
-        assertThat(selection.getSelectedTeachings(), is(fsoList(fso)));
+        assertThat(selection.getSelectedTeachings(), is(fsoList(Teachings.fso())));
     }
 
     private TeachingList teachings(Teaching fso, Teaching is2) {
@@ -26,8 +26,8 @@ public class SelectionTests {
         return teachings;
     }
 
-    private TeachingList fsoList(Teaching fso) {
-        final TeachingList teachings = new TeachingList();
+    private ruber.model.TeachingList fsoList(ruber.model.Teaching fso) {
+        final ruber.model.TeachingList teachings = new ruber.model.TeachingList();
         teachings.add(fso);
         return teachings;
     }
@@ -39,7 +39,7 @@ public class SelectionTests {
         final Professor replacement = new Professor(Professors.replacement());
         selection.showProfessorsToReplace(professors(ruben, replacement));
         ruben.select();
-        assertThat(selection.getSelectedProfessor(), is(ruben));
+        assertThat(selection.getSelectedProfessor(), is(Professors.ruben()));
     }
 
     private ProfessorList professors(Professor professor1, Professor professor2) {

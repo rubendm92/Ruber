@@ -15,15 +15,15 @@ public class Selection {
         return teachings;
     }
 
-    public TeachingList getSelectedTeachings() {
-        return teachings.stream().filter(Teaching::isSelected).collect(Collectors.toCollection(() -> new TeachingList()));
+    public ruber.model.TeachingList getSelectedTeachings() {
+        return teachings.stream().filter(Teaching::isSelected).map(Teaching::getModel).collect(Collectors.toCollection(ruber.model.TeachingList::new));
     }
 
     public void showProfessorsToReplace(ProfessorList professors) {
         this.professorsToReplace = professors;
     }
 
-    public Professor getSelectedProfessor() {
-        return professorsToReplace.stream().filter(Professor::isSelected).findFirst().get();
+    public ruber.model.Professor getSelectedProfessor() {
+        return professorsToReplace.stream().filter(Professor::isSelected).map(Professor::getModel).findFirst().get();
     }
 }

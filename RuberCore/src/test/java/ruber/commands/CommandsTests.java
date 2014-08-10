@@ -69,7 +69,7 @@ public class CommandsTests {
         final Command command = new SignTeachingsCommand(frame, saver);
 
         when(frame.getProfessorFromSession()).thenReturn(Professors.ruben());
-        when(frame.getProfessorSelected()).thenReturn(Professors.ruben());
+        when(frame.getSelectedProfessor()).thenReturn(Professors.ruben());
         when(frame.getSelectedTeachings()).thenReturn(teachings);
         command.execute();
 

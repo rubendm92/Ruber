@@ -6,7 +6,11 @@ public class Teaching extends SelectableItem {
 
     public Teaching(ruber.model.Teaching teaching) {
         super();
+        select();
         this.teaching = teaching;
     }
 
+    public ruber.model.Teaching getModel() {
+        return teaching;
+    }
 }

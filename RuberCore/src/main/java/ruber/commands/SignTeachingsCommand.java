@@ -19,7 +19,7 @@ public class SignTeachingsCommand implements Command {
 
     @Override
     public void execute() {
-        frame.getSelectedTeachings().forEach(teaching -> teaching.sign(frame.getProfessorSelected(), signature()));
+        frame.getSelectedTeachings().forEach(teaching -> teaching.sign(frame.getSelectedProfessor(), signature()));
         saver.save(frame.getProfessorFromSession(), frame.getSelectedTeachings());
     }
 

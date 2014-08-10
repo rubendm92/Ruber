@@ -2,10 +2,10 @@ package ruber.viewmodels;
 
 public class SelectableItem {
 
-    protected boolean isSelected;
+    private boolean isSelected;
 
     public SelectableItem() {
-        this.isSelected = true;
+        this.isSelected = false;
     }
 
     public void select() {

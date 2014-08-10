@@ -6,12 +6,17 @@ import ruber.model.TeachingList;
 
 public class Frame {
 
+    private final Session session;
+    private final Selection selection;
     private String dni;
     private Professor professorToReplace;
     private Professor professor;
-    private TeachingList selectedTeachings;
     private byte[] signature;
-    private Professor professorSelected;
+
+    public Frame(Session session, Selection selection) {
+        this.session = session;
+        this.selection = selection;
+    }
 
     public void clear() {
     }
@@ -37,18 +42,18 @@ public class Frame {
     }
 
     public Professor getProfessorFromSession() {
-        return professor;
+        return session.getProfessor();
     }
 
     public TeachingList getSelectedTeachings() {
-        return selectedTeachings;
+        return selection.getSelectedTeachings();
     }
 
     public byte[] getSignature() {
         return signature;
     }
 
-    public Professor getProfessorSelected() {
-        return professorSelected;
+    public Professor getSelectedProfessor() {
+        return selection.getSelectedProfessor();
     }
 }
