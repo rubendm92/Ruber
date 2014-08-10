@@ -27,10 +27,6 @@ public class Frame {
     public void showTeachings(TeachingList teachings) {
     }
 
-    public String getDni() {
-        return dni;
-    }
-
     public void showProfessors(ProfessorList professors) {
     }
 

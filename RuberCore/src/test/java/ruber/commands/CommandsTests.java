@@ -32,13 +32,12 @@ public class CommandsTests {
     }
 
     @Test
-    public void executingStartSessionCommandShouldShowProfessorAndTeachingsForHim() {
-        Command command = new StartSessionCommand(frame, Professors.list(), Teachings.longList());
+    public void executingShowTeachingsCommandShouldShowTeachingsForProfessorFromSession() {
+        Command command = new ShowTeachingsCommand(frame, Teachings.longList());
 
-        when(frame.getDni()).thenReturn("12312323");
+        when(frame.getProfessorFromSession()).thenReturn(Professors.ruben());
         command.execute();
 
-        verify(frame).initSession(Professors.ruben());
         verify(frame).showTeachings(Teachings.fsoList());
     }
 
