@@ -24,4 +24,9 @@ public class Session implements Observer {
     public void changed() {
         professor = professors.getByDni(dniInput.getInput());
     }
+
+    public void close() {
+        professor = null;
+        dniInput.clear();
+    }
 }
