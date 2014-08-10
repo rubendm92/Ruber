@@ -1,6 +1,7 @@
 package ruber.viewmodels;
 
 import org.junit.Test;
+import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
 
 import static org.hamcrest.core.Is.is;
@@ -13,7 +14,7 @@ public class SelectionTests {
         Selection selection = new Selection();
         final Teaching fso = new Teaching(Teachings.fso());
         final Teaching is2 = new Teaching(Teachings.is2());
-        selection.setTeachings(teachings(fso, is2));
+        selection.showTeachings(teachings(fso, is2));
         is2.unselect();
         assertThat(selection.getSelectedTeachings(), is(fsoList(fso)));
     }
@@ -29,5 +30,22 @@ public class SelectionTests {
         final TeachingList teachings = new TeachingList();
         teachings.add(fso);
         return teachings;
+    }
+
+    @Test
+    public void getSelectedProfessor() {
+        Selection selection = new Selection();
+        final Professor ruben = new Professor(Professors.ruben());
+        final Professor replacement = new Professor(Professors.replacement());
+        selection.showProfessorsToReplace(professors(ruben, replacement));
+        ruben.select();
+        assertThat(selection.getSelectedProfessor(), is(ruben));
+    }
+
+    private ProfessorList professors(Professor professor1, Professor professor2) {
+        ProfessorList professors = new ProfessorList();
+        professors.add(professor1);
+        professors.add(professor2);
+        return professors;
     }
 }
