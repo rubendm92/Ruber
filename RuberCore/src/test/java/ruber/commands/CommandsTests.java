@@ -35,7 +35,7 @@ public class CommandsTests {
     public void executingStartSessionCommandShouldShowProfessorAndTeachingsForHim() {
         Command command = new StartSessionCommand(frame, Professors.list(), Teachings.longList());
 
-        when(frame.getDni()).thenReturn("44739382");
+        when(frame.getDni()).thenReturn("12312323");
         command.execute();
 
         verify(frame).initSession(Professors.ruben());

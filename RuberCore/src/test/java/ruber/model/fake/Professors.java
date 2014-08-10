@@ -19,11 +19,11 @@ public class Professors {
     }
 
     public static Professor ruben() {
-        return new Professor("44739382", "DÍAZ MARTÍNEZ RUBÉN", "ruben.diaz103@estudiantes.ulpgc.es");
+        return new Professor("12312323", "DÍAZ MARTÍNEZ RUBÉN", "ruben.diaz103@estudiantes.ulpgc.es");
     }
 
     public static Professor replacement() {
-        return new Professor("44774477", "OTRO PROFESOR", "ruben.diaz103@estudiantes.ulpgc.es");
+        return new Professor("11111111", "OTRO PROFESOR", "ruben.diaz103@estudiantes.ulpgc.es");
     }
 
 }

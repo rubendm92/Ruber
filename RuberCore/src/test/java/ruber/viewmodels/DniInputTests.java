@@ -14,7 +14,7 @@ public class DniInputTests {
     private DniInputViewModel dniInput;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dniInput = new DniInputViewModel();
     }
 
