@@ -1,5 +1,6 @@
 package ruber.viewmodels;
 
+import org.junit.Before;
 import org.junit.Test;
 import ruber.model.fake.Professors;
 
@@ -8,20 +9,25 @@ import static org.junit.Assert.assertThat;
 
 public class SessionTests {
 
+    private DniInputViewModel dniInput;
+    private SessionViewModel session;
+
+    @Before
+    public void setUp() {
+        dniInput = new DniInputViewModel();
+        session = new SessionViewModel(dniInput, Professors.list());
+    }
+
     @Test
     public void whenDniIsCompletedSessionShouldBeStartedForProfessorWithThatDni() {
-        DniInputViewModel dniInput = new DniInputViewModel();
-        SessionViewModel session = new SessionViewModel(dniInput, Professors.list());
-
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
-        dniInput.type('2');
-        dniInput.type('3');
-
+        for (char character : "12312323".toCharArray())
+            dniInput.type(character);
         assertThat(session.getProfessor(), is(Professors.ruben()));
+    }
+
+    @Test(expected = ProfessorNotFoundException.class)
+    public void whenThereIsNoProfessorForDniItShouldThrowAnException() {
+        for (char character : "12312322".toCharArray())
+            dniInput.type(character);
     }
 }
