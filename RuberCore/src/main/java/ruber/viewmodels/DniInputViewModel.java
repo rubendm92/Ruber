@@ -15,4 +15,8 @@ public class DniInputViewModel {
     public String getInput() {
         return input;
     }
+
+    public void delete() {
+        input = input.substring(0, input.length() - 1);
+    }
 }
