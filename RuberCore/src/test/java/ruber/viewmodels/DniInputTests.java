@@ -27,4 +27,16 @@ public class DniInputTests {
 
         assertThat(dniInput.getInput(), is("12"));
     }
+
+    @Test
+    public void whenClearIsPressedItShouldRemoveAllFromDisplay() {
+        DniInputViewModel dniInput = new DniInputViewModel();
+        dniInput.type('1');
+        dniInput.type('2');
+        dniInput.type('3');
+
+        dniInput.clear();
+
+        assertThat(dniInput.getInput(), is(""));
+    }
 }
