@@ -1,7 +1,10 @@
 package ruber.viewmodels;
 
-public class DniInputViewModel {
+import ruber.model.Observable;
 
+public class DniInputViewModel extends Observable {
+
+    private static final int DNI_LENGTH = 8;
     private String input;
 
     public DniInputViewModel() {
@@ -10,6 +13,8 @@ public class DniInputViewModel {
 
     public void type(char character) {
         input += character;
+        if (input.length() == DNI_LENGTH)
+            notifyChanges();
     }
 
     public String getInput() {
