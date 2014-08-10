@@ -7,7 +7,7 @@ import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
 import ruber.persistence.SignedTeachingsSaver;
 import ruber.view.Command;
-import ruber.viewmodels.FrameViewModel;
+import ruber.viewmodels.Frame;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -15,11 +15,11 @@ import static org.mockito.Mockito.*;
 
 public class CommandsTests {
 
-    private FrameViewModel frame;
+    private Frame frame;
 
     @Before
     public void setUp() {
-        frame = mock(FrameViewModel.class);
+        frame = mock(Frame.class);
     }
 
     @Test

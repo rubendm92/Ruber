@@ -1,7 +1,5 @@
 package ruber.model;
 
-import ruber.viewmodels.ProfessorNotFoundException;
-
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 

@@ -4,7 +4,7 @@ import ruber.model.Professor;
 import ruber.model.ProfessorList;
 import ruber.model.TeachingList;
 
-public class FrameViewModel {
+public class Frame {
 
     private String dni;
     private Professor professorToReplace;

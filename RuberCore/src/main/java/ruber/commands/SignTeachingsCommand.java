@@ -3,16 +3,16 @@ package ruber.commands;
 import ruber.model.Signature;
 import ruber.persistence.SignedTeachingsSaver;
 import ruber.view.Command;
-import ruber.viewmodels.FrameViewModel;
+import ruber.viewmodels.Frame;
 
 import java.time.LocalTime;
 
 public class SignTeachingsCommand implements Command {
 
-    private final FrameViewModel frame;
+    private final Frame frame;
     private final SignedTeachingsSaver saver;
 
-    public SignTeachingsCommand(FrameViewModel frame, SignedTeachingsSaver saver) {
+    public SignTeachingsCommand(Frame frame, SignedTeachingsSaver saver) {
         this.frame = frame;
         this.saver = saver;
     }

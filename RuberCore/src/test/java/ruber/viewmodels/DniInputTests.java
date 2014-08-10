@@ -11,11 +11,11 @@ import static org.mockito.Mockito.verify;
 
 public class DniInputTests {
 
-    private DniInputViewModel dniInput;
+    private DniInput dniInput;
 
     @Before
     public void setUp() {
-        dniInput = new DniInputViewModel();
+        dniInput = new DniInput();
     }
 
     @Test
@@ -27,9 +27,8 @@ public class DniInputTests {
 
     @Test
     public void whenDeleteIsPressedItShouldRemoveLastCharacterFromDisplay() {
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
+        for (char character : "123".toCharArray())
+            dniInput.type(character);
 
         dniInput.delete();
 
@@ -38,9 +37,8 @@ public class DniInputTests {
 
     @Test
     public void whenClearIsPressedItShouldRemoveAllFromDisplay() {
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
+        for (char character : "123".toCharArray())
+            dniInput.type(character);
 
         dniInput.clear();
 
@@ -52,14 +50,8 @@ public class DniInputTests {
         Observer observer = mock(Observer.class);
         dniInput.addObserver(observer);
 
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
-        dniInput.type('1');
-        dniInput.type('2');
-        dniInput.type('3');
-        dniInput.type('2');
-        dniInput.type('3');
+        for (char character : "12312323".toCharArray())
+            dniInput.type(character);
 
         verify(observer).changed();
     }

@@ -2,12 +2,12 @@ package ruber.viewmodels;
 
 import ruber.model.Observable;
 
-public class DniInputViewModel extends Observable {
+public class DniInput extends Observable {
 
     private static final int DNI_LENGTH = 8;
     private String input;
 
-    public DniInputViewModel() {
+    public DniInput() {
         this.input = "";
     }
 
