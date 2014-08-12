@@ -8,10 +8,6 @@ public class FrameViewModel {
 
     private final SessionViewModel session;
     private final SelectionViewModel selection;
-    private String dni;
-    private Professor professorToReplace;
-    private Professor professor;
-    private byte[] signature;
 
     public FrameViewModel(SessionViewModel session, SelectionViewModel selection) {
         this.session = session;
@@ -20,9 +16,6 @@ public class FrameViewModel {
 
     public void clear() {
         selection.clear();
-    }
-
-    public void initSession(Professor professor) {
     }
 
     public void showTeachings(TeachingList teachings) {
@@ -37,7 +30,7 @@ public class FrameViewModel {
     }
 
     public Professor getProfessorToReplace() {
-        return professorToReplace;
+        return selection.getProfessorToReplace();
     }
 
     public Professor getProfessorFromSession() {
@@ -49,10 +42,10 @@ public class FrameViewModel {
     }
 
     public byte[] getSignature() {
-        return signature;
+        return selection.getSignature();
     }
 
     public Professor getSelectedProfessor() {
-        return selection.getSelectedProfessor();
+        return (selection.getProfessorToReplace() == null ? session.getProfessor() : selection.getProfessorToReplace());
     }
 }

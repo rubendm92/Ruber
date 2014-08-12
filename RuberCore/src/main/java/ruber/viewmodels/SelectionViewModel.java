@@ -10,6 +10,7 @@ public class SelectionViewModel {
 
     private TeachingListViewModel teachings;
     private ProfessorListViewModel professorsToReplace;
+    private byte[] signature;
 
     public void showTeachings(TeachingList teachings) {
         teachings.forEach(teaching -> this.teachings.add(new TeachingViewModel(teaching)));
@@ -23,12 +24,16 @@ public class SelectionViewModel {
         professors.forEach(professor -> this.professorsToReplace.add(new ProfessorViewModel(professor)));
     }
 
-    public Professor getSelectedProfessor() {
+    public Professor getProfessorToReplace() {
         return professorsToReplace.stream().filter(ProfessorViewModel::isSelected).map(ProfessorViewModel::getModel).findFirst().get();
     }
 
     public void clear() {
         teachings.clear();
         professorsToReplace.clear();
+    }
+
+    public byte[] getSignature() {
+        return signature;
     }
 }
