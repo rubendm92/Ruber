@@ -30,6 +30,7 @@ public class FrameViewModel {
     }
 
     public void showProfessors(ProfessorList professors) {
+        selection.showProfessorsToReplace(professors);
     }
 
     public void showProfessorToReplace() {

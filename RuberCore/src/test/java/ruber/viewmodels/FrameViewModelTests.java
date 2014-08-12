@@ -2,6 +2,7 @@ package ruber.viewmodels;
 
 import org.junit.Before;
 import org.junit.Test;
+import ruber.model.fake.Professors;
 import ruber.model.fake.Teachings;
 
 import static org.mockito.Mockito.mock;
@@ -32,5 +33,12 @@ public class FrameViewModelTests {
         frame.showTeachings(Teachings.longList());
 
         verify(selection).showTeachings(Teachings.longList());
+    }
+
+    @Test
+    public void callingMethodShowProfessorsShouldCallToMethodInSelection() {
+        frame.showProfessors(Professors.list());
+
+        verify(selection).showProfessorsToReplace(Professors.list());
     }
 }
