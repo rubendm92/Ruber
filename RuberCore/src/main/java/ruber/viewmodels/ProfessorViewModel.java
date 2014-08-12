@@ -1,10 +1,10 @@
 package ruber.viewmodels;
 
-public class Professor extends SelectableItem {
+public class ProfessorViewModel extends SelectableItemViewModel {
 
     private final ruber.model.Professor professor;
 
-    public Professor(ruber.model.Professor professor) {
+    public ProfessorViewModel(ruber.model.Professor professor) {
         super();
         unselect();
         this.professor = professor;

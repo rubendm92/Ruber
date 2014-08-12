@@ -1,13 +1,13 @@
 package ruber.commands;
 
 import ruber.view.Command;
-import ruber.viewmodels.Frame;
+import ruber.viewmodels.FrameViewModel;
 
 public class CloseSessionCommand implements Command {
 
-    private final Frame frame;
+    private final FrameViewModel frame;
 
-    public CloseSessionCommand(Frame frame) {
+    public CloseSessionCommand(FrameViewModel frame) {
         this.frame = frame;
     }
 

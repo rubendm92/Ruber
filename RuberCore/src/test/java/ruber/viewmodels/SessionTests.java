@@ -11,13 +11,13 @@ import static org.junit.Assert.assertThat;
 
 public class SessionTests {
 
-    private DniInput dniInput;
-    private Session session;
+    private DniInputViewModel dniInput;
+    private SessionViewModel session;
 
     @Before
     public void setUp() {
-        dniInput = new DniInput();
-        session = new Session(dniInput, Professors.list());
+        dniInput = new DniInputViewModel();
+        session = new SessionViewModel(dniInput, Professors.list());
     }
 
     @Test

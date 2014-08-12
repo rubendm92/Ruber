@@ -4,13 +4,13 @@ import ruber.model.Observer;
 import ruber.model.Professor;
 import ruber.model.ProfessorList;
 
-public class Session implements Observer {
+public class SessionViewModel implements Observer {
 
-    private final DniInput dniInput;
+    private final DniInputViewModel dniInput;
     private final ProfessorList professors;
     private Professor professor;
 
-    public Session(DniInput dniInput, ProfessorList professors) {
+    public SessionViewModel(DniInputViewModel dniInput, ProfessorList professors) {
         this.dniInput = dniInput;
         this.dniInput.addObserver(this);
         this.professors = professors;

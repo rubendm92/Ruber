@@ -11,11 +11,11 @@ import static org.mockito.Mockito.verify;
 
 public class DniInputTests {
 
-    private DniInput dniInput;
+    private DniInputViewModel dniInput;
 
     @Before
     public void setUp() {
-        dniInput = new DniInput();
+        dniInput = new DniInputViewModel();
     }
 
     @Test

@@ -3,14 +3,14 @@ package ruber.commands;
 import ruber.model.Professor;
 import ruber.model.TeachingList;
 import ruber.view.Command;
-import ruber.viewmodels.Frame;
+import ruber.viewmodels.FrameViewModel;
 
 public class ShowTeachingsCommand implements Command {
 
-    private final Frame frame;
+    private final FrameViewModel frame;
     private final TeachingList teachings;
 
-    public ShowTeachingsCommand(Frame frame, TeachingList teachings) {
+    public ShowTeachingsCommand(FrameViewModel frame, TeachingList teachings) {
         this.frame = frame;
         this.teachings = teachings;
     }
