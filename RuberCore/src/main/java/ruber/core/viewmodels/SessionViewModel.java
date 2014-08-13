@@ -1,5 +1,6 @@
 package ruber.core.viewmodels;
 
+import ruber.core.listeners.OnDniCompletedListener;
 import ruber.core.model.Observer;
 import ruber.core.model.Professor;
 import ruber.core.model.ProfessorList;
@@ -28,5 +29,9 @@ public class SessionViewModel implements Observer {
     public void close() {
         professor = null;
         dniInput.clear();
+    }
+
+    public void addOnDniCompletedListener(OnDniCompletedListener listener) {
+        listener.onDniCompleted();
     }
 }

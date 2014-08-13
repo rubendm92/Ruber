@@ -2,12 +2,15 @@ package ruber.core.viewmodels;
 
 import org.junit.Before;
 import org.junit.Test;
+import ruber.core.listeners.OnDniCompletedListener;
 import ruber.core.model.ProfessorNotFoundException;
 import ruber.core.model.fake.Professors;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class SessionTests {
 
@@ -43,5 +46,13 @@ public class SessionTests {
     private void initSessionForProfessor() {
         for (char character : "12312323".toCharArray())
             dniInput.type(character);
+    }
+
+    @Test
+    public void sessionNofityWhenDniIsCompleted() {
+        OnDniCompletedListener listener = mock(OnDniCompletedListener.class);
+        session.addOnDniCompletedListener(listener);
+        initSessionForProfessor();
+        verify(listener).onDniCompleted();
     }
 }
