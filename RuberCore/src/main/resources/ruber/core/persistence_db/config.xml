@@ -1,0 +1,7 @@
+<database-configuration>
+    <host>eii.ulpgc.es</host>
+    <port>3306</port>
+    <database-name>control_de_firmas</database-name>
+    <username>ruben_diaz</username>
+    <password>AnBwMfa7CXdFeq36</password>
+</database-configuration>
