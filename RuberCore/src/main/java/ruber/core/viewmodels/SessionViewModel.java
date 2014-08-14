@@ -1,6 +1,7 @@
 package ruber.core.viewmodels;
 
 import ruber.core.listeners.OnDniCompletedListener;
+import ruber.core.listeners.OnSessionClosedListener;
 import ruber.core.model.Observer;
 import ruber.core.model.Professor;
 import ruber.core.model.ProfessorList;
@@ -11,6 +12,7 @@ public class SessionViewModel implements Observer {
     private final ProfessorList professors;
     private Professor professor;
     private OnDniCompletedListener onDniCompletedListener;
+    private OnSessionClosedListener onSessionClosedListener;
 
     public SessionViewModel(DniInputViewModel dniInput, ProfessorList professors) {
         this.dniInput = dniInput;
@@ -32,9 +34,15 @@ public class SessionViewModel implements Observer {
     public void close() {
         professor = null;
         dniInput.clear();
+        if (onSessionClosedListener != null)
+            onSessionClosedListener.execute();
     }
 
     public void setOnDniCompletedListener(OnDniCompletedListener listener) {
         this.onDniCompletedListener = listener;
+    }
+
+    public void setOnSessionClosedListener(OnSessionClosedListener onSessionClosedListener) {
+        this.onSessionClosedListener = onSessionClosedListener;
     }
 }
