@@ -49,10 +49,10 @@ public class SessionTests {
     }
 
     @Test
-    public void sessionNofityWhenDniIsCompleted() {
+    public void sessionNotifyWhenDniIsCompleted() {
         OnDniCompletedListener listener = mock(OnDniCompletedListener.class);
-        session.addOnDniCompletedListener(listener);
+        session.setOnDniCompletedListener(listener);
         initSessionForProfessor();
-        verify(listener).onDniCompleted();
+        verify(listener).execute();
     }
 }

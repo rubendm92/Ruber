@@ -10,6 +10,7 @@ public class SessionViewModel implements Observer {
     private final DniInputViewModel dniInput;
     private final ProfessorList professors;
     private Professor professor;
+    private OnDniCompletedListener onDniCompletedListener;
 
     public SessionViewModel(DniInputViewModel dniInput, ProfessorList professors) {
         this.dniInput = dniInput;
@@ -24,6 +25,8 @@ public class SessionViewModel implements Observer {
     @Override
     public void changed() {
         professor = professors.getByDni(dniInput.getInput());
+        if (onDniCompletedListener != null)
+            onDniCompletedListener.execute();
     }
 
     public void close() {
@@ -31,7 +34,7 @@ public class SessionViewModel implements Observer {
         dniInput.clear();
     }
 
-    public void addOnDniCompletedListener(OnDniCompletedListener listener) {
-        listener.onDniCompleted();
+    public void setOnDniCompletedListener(OnDniCompletedListener listener) {
+        this.onDniCompletedListener = listener;
     }
 }
