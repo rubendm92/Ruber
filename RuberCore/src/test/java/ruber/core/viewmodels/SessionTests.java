@@ -2,8 +2,6 @@ package ruber.core.viewmodels;
 
 import org.junit.Before;
 import org.junit.Test;
-import ruber.core.listeners.OnDniCompletedListener;
-import ruber.core.listeners.OnSessionClosedListener;
 import ruber.core.model.ProfessorNotFoundException;
 import ruber.core.model.fake.Professors;
 
@@ -51,7 +49,7 @@ public class SessionTests {
 
     @Test
     public void sessionNotifiesWhenDniIsCompleted() {
-        OnDniCompletedListener listener = mock(OnDniCompletedListener.class);
+        Listener listener = mock(Listener.class);
         session.setOnDniCompletedListener(listener);
         initSessionForProfessor();
         verify(listener).execute();
@@ -59,7 +57,7 @@ public class SessionTests {
 
     @Test
     public void sessionNotifiesWhenSessionIsClosed() {
-        OnSessionClosedListener listener = mock(OnSessionClosedListener.class);
+        Listener listener = mock(Listener.class);
         session.setOnSessionClosedListener(listener);
         initSessionForProfessor();
         session.close();
