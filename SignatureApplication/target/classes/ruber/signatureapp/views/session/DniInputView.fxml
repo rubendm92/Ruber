@@ -1,0 +1,53 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane fx:id="dniInput" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.DniInputViewController">
+    <stylesheets>
+        <URL value="@../main.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="15" bottom="10" left="15"/>
+    </padding>
+    <top>
+        <BorderPane styleClass="displayPanel">
+            <padding>
+                <Insets top="10" right="0" bottom="10" left="0"/>
+            </padding>
+            <center>
+                <Label fx:id="display" styleClass="dniLabel"/>
+            </center>
+            <right>
+                <HBox visible="false" fx:id="clearPanel">
+                    <Separator />
+                    <Button fx:id="clearButton">X</Button>
+                </HBox>
+            </right>
+        </BorderPane>
+    </top>
+    <center>
+        <HBox fx:id="keyboard" prefHeight="380.0" prefWidth="300.0">
+            <padding>
+                <Insets top="10" right="0" bottom="10" left="0"/>
+            </padding>
+            <VBox>
+                <Button>1</Button>
+                <Button>4</Button>
+                <Button>7</Button>
+                <Button>␣</Button>
+            </VBox>
+            <VBox>
+                <Button>2</Button>
+                <Button>5</Button>
+                <Button>8</Button>
+                <Button>0</Button>
+            </VBox>
+            <VBox>
+                <Button>3</Button>
+                <Button>6</Button>
+                <Button>9</Button>
+                <Button>⌫</Button>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

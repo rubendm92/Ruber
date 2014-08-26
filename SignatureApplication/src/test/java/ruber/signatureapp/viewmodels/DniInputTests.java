@@ -1,11 +1,14 @@
 package ruber.signatureapp.viewmodels;
 
-import org.hamcrest.core.Is;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import ruber.core.model.Observer;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class DniInputTests {
 
@@ -17,10 +20,14 @@ public class DniInputTests {
     }
 
     @Test
-    public void whenANumberIsTypedItShouldBeShownOnTheDisplay() {
+    public void whenANumberIsTypedItShouldNotifyToAnObserverAndBeAbleToGetInput() {
+        Observer observer = mock(Observer.class);
+        dniInput.addObserver(observer);
+
         dniInput.type('1');
 
-        Assert.assertThat(dniInput.getInput(), Is.is("1"));
+        verify(observer).changed();
+        assertThat(dniInput.getInput(), is("1"));
     }
 
     @Test
@@ -30,7 +37,7 @@ public class DniInputTests {
 
         dniInput.delete();
 
-        Assert.assertThat(dniInput.getInput(), Is.is("12"));
+        assertThat(dniInput.getInput(), is("12"));
     }
 
     @Test
@@ -40,17 +47,14 @@ public class DniInputTests {
 
         dniInput.clear();
 
-        Assert.assertThat(dniInput.getInput(), Is.is(""));
+        assertThat(dniInput.getInput(), is(""));
     }
 
     @Test
-    public void whenDniIsCompletedItShouldNotifyToAnObserver() {
-        Observer observer = Mockito.mock(Observer.class);
-        dniInput.addObserver(observer);
-
+    public void whenDniHas8CharactersItIsCompleted() {
         for (char character : "12312323".toCharArray())
             dniInput.type(character);
 
-        Mockito.verify(observer).changed();
+        assertTrue(dniInput.isCompleted());
     }
 }

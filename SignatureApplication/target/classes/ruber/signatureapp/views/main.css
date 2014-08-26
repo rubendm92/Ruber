@@ -35,3 +35,41 @@ Label {
 #time {
     -fx-font-size: 36px;
 }
+
+#dniInput {
+    -fx-font-family: "Arial";
+}
+
+.dniLabel {
+    -fx-font-size: 30px;
+    -fx-pref-width: 200px;
+    -fx-text-fill: black;
+}
+
+.displayPanel {
+    -fx-max-width: 270px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+}
+
+#clearButton {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+}
+
+#keyboard Button {
+    -fx-font-size: 32px;
+    -fx-pref-height: 90px;
+    -fx-pref-width: 90px;
+}
+
+#clearPanel Separator {
+    -fx-orientation: vertical;
+}
+
+VBox Separator {
+    -fx-orientation: horizontal;
+}

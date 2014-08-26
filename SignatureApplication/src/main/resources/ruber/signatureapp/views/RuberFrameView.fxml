@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import java.net.URL?>
-
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" id="frame" fx:controller="ruber.signatureapp.viewcontrollers.RuberFrameViewController">
     <stylesheets>
         <URL value="@main.css"/>
@@ -10,4 +11,10 @@
     <top>
         <fx:include fx:id="headerView" source="header/HeaderView.fxml"/>
     </top>
+    <left>
+        <HBox>
+            <fx:include fx:id="sessionView" source="session/SessionView.fxml"/>
+            <Separator orientation="VERTICAL" />
+        </HBox>
+    </left>
 </BorderPane>

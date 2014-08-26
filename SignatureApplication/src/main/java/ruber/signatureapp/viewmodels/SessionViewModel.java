@@ -24,6 +24,11 @@ public class SessionViewModel implements Observer {
 
     @Override
     public void changed() {
+        if (!dniInput.isCompleted()) return;
+        initSession();
+    }
+
+    private void initSession() {
         professor = professors.getByDni(dniInput.getInput());
         if (onDniCompletedListener != null)
             onDniCompletedListener.execute();
@@ -42,5 +47,9 @@ public class SessionViewModel implements Observer {
 
     public void setOnSessionClosedListener(Listener onSessionClosedListener) {
         this.onSessionClosedListener = onSessionClosedListener;
+    }
+
+    public DniInputViewModel getDniInputViewModel() {
+        return dniInput;
     }
 }

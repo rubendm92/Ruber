@@ -6,10 +6,12 @@ import ruber.core.model.TeachingList;
 
 public class RuberFrameViewModel {
 
+    private final HeaderViewModel header;
     private final SessionViewModel session;
     private final SelectionViewModel selection;
 
-    public RuberFrameViewModel(SessionViewModel session, SelectionViewModel selection) {
+    public RuberFrameViewModel(HeaderViewModel header, SessionViewModel session, SelectionViewModel selection) {
+        this.header = header;
         this.session = session;
         this.selection = selection;
     }
@@ -47,5 +49,13 @@ public class RuberFrameViewModel {
 
     public Professor getSelectedProfessor() {
         return (selection.getProfessorToReplace() == null ? session.getProfessor() : selection.getProfessorToReplace());
+    }
+
+    public HeaderViewModel getHeader() {
+        return header;
+    }
+
+    public SessionViewModel getSession() {
+        return session;
     }
 }

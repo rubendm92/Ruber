@@ -13,8 +13,7 @@ public class DniInputViewModel extends Observable {
 
     public void type(char character) {
         input += character;
-        if (input.length() == DNI_LENGTH)
-            notifyChanges();
+        notifyChanges();
     }
 
     public String getInput() {
@@ -23,9 +22,14 @@ public class DniInputViewModel extends Observable {
 
     public void delete() {
         input = input.substring(0, input.length() - 1);
+        notifyChanges();
     }
 
     public void clear() {
         input = "";
+    }
+
+    public boolean isCompleted() {
+        return DNI_LENGTH == input.length();
     }
 }

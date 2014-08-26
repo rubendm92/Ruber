@@ -10,15 +10,17 @@ import static org.mockito.Mockito.verify;
 
 public class RuberFrameViewModelTests {
 
+    private HeaderViewModel header;
     private SessionViewModel session;
     private SelectionViewModel selection;
     private RuberFrameViewModel frame;
 
     @Before
     public void setUp() {
+        header = mock(HeaderViewModel.class);
         session = mock(SessionViewModel.class);
         selection = mock(SelectionViewModel.class);
-        frame = new RuberFrameViewModel(session, selection);
+        frame = new RuberFrameViewModel(header, session, selection);
     }
 
     @Test

@@ -4,12 +4,13 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import ruber.core.model.ProfessorNotFoundException;
 import ruber.signatureapp.fake.Professors;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class SessionTests {
 
@@ -49,18 +50,18 @@ public class SessionTests {
 
     @Test
     public void sessionNotifiesWhenDniIsCompleted() {
-        Listener listener = Mockito.mock(Listener.class);
+        Listener listener = mock(Listener.class);
         session.setOnDniCompletedListener(listener);
         initSessionForProfessor();
-        Mockito.verify(listener).execute();
+        verify(listener).execute();
     }
 
     @Test
     public void sessionNotifiesWhenSessionIsClosed() {
-        Listener listener = Mockito.mock(Listener.class);
+        Listener listener = mock(Listener.class);
         session.setOnSessionClosedListener(listener);
         initSessionForProfessor();
         session.close();
-        Mockito.verify(listener).execute();
+        verify(listener).execute();
     }
 }
