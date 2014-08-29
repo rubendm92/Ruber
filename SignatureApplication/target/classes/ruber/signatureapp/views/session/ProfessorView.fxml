@@ -1,0 +1,30 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.ProfessorViewController">
+    <stylesheets>
+        <URL value="@../main.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="0" bottom="10" left="0"/>
+    </padding>
+    <top>
+        <VBox>
+            <fx:include fx:id="professorInfoView" source="ProfessorInfo.fxml"/>
+            <Separator />
+            <VBox visible="false" fx:id="replacementPanel">
+                <Label id="replacementLabel">sustituye a</Label>
+                <fx:include fx:id="professorToReplaceView" source="ProfessorInfo.fxml"/>
+            </VBox>
+        </VBox>
+    </top>
+    <bottom>
+        <VBox alignment="CENTER"  fx:id="closeSessionPanel" spacing="10">
+            <Separator />
+            <Label alignment="CENTER">Cerrar</Label>
+        </VBox>
+    </bottom>
+</BorderPane>

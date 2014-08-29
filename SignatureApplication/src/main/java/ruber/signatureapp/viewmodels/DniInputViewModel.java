@@ -8,10 +8,12 @@ public class DniInputViewModel extends Observable {
     private String input;
 
     public DniInputViewModel() {
-        this.input = "";
+        this.input = "DNI";
     }
 
     public void type(char character) {
+        if (input.equals("DNI"))
+            input = "";
         input += character;
         notifyChanges();
     }
@@ -22,14 +24,21 @@ public class DniInputViewModel extends Observable {
 
     public void delete() {
         input = input.substring(0, input.length() - 1);
+        if (input.equals(""))
+            input = "DNI";
         notifyChanges();
     }
 
     public void clear() {
-        input = "";
+        input = "DNI";
+        notifyChanges();
     }
 
     public boolean isCompleted() {
         return DNI_LENGTH == input.length();
+    }
+
+    public boolean isEmpty() {
+        return input.equals("DNI");
     }
 }

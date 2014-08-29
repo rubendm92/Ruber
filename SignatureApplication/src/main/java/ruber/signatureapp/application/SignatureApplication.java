@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ruber.core.model.Professor;
 import ruber.core.model.ProfessorList;
 import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
 import ruber.signatureapp.viewmodels.*;
@@ -34,7 +35,9 @@ public class SignatureApplication extends Application {
     }
 
     private SessionViewModel session() {
-        return new SessionViewModel(new DniInputViewModel(), new ProfessorList());
+        return new SessionViewModel(new DniInputViewModel(), new ProfessorList() {{
+            add(new Professor("33837361", "MARGARITA", "hola"));
+        }});
     }
 
     private HeaderViewModel header() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+
+<VBox alignment="CENTER_LEFT" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.ProfessorInfoViewController">
+    <stylesheets>
+        <URL value="@../main.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="0" bottom="10" left="15"/>
+    </padding>
+    <HBox fx:id="imagePanel">
+        <ImageView fitHeight="120.0" fitWidth="120.0" fx:id="imageView"/>
+    </HBox>
+    <Text fx:id="professorName" wrappingWidth="280" />
+</VBox>

@@ -2,6 +2,7 @@ package ruber.signatureapp.viewcontrollers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -23,6 +24,10 @@ public class DniInputViewController implements Initializable, Observer {
     private HBox keyboard;
     @FXML
     private Label display;
+    @FXML
+    private Node clearPanel;
+    @FXML
+    private Button clearButton;
 
     private void addListeners(VBox box) {
         box.getChildren().stream().forEach((node) -> addListener((Button) node));
@@ -30,6 +35,7 @@ public class DniInputViewController implements Initializable, Observer {
 
     private void addListener(final Button button) {
         button.setOnAction((event) -> performAction(getCharAtButton(button)));
+        clearButton.setOnAction((event) -> clear());
     }
 
     private char getCharAtButton(final Button button) {
@@ -38,8 +44,26 @@ public class DniInputViewController implements Initializable, Observer {
 
     private void performAction(char character) {
         if (character == SPACE_CHAR) return;
-        if (character == REMOVE_CHAR) viewModel.delete();
-        else viewModel.type(character);
+        if (character == REMOVE_CHAR) delete();
+        else type(character);
+    }
+
+    private void delete() {
+        viewModel.delete();
+        if (viewModel.isEmpty())
+            clearPanel.setVisible(false);
+    }
+
+    private void type(char character) {
+        viewModel.type(character);
+        if (!viewModel.isEmpty())
+            clearPanel.setVisible(true);
+    }
+
+
+    public void clear() {
+        viewModel.clear();
+        clearPanel.setVisible(false);
     }
 
     @Override
@@ -50,6 +74,7 @@ public class DniInputViewController implements Initializable, Observer {
     public void setViewModel(DniInputViewModel viewModel) {
         this.viewModel = viewModel;
         viewModel.addObserver(this);
+        changed();
     }
 
     @Override

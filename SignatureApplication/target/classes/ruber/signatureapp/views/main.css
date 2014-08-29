@@ -58,6 +58,7 @@ Label {
 #clearButton {
     -fx-background-color: transparent;
     -fx-font-size: 20px;
+    -fx-text-fill: black;
 }
 
 #keyboard Button {
@@ -72,4 +73,14 @@ Label {
 
 VBox Separator {
     -fx-orientation: horizontal;
+}
+
+#closeSessionPanel {
+    -fx-max-width: 400px;
+    -fx-pref-height: 50px;
+}
+
+#closeSessionPanel Label {
+    -fx-font-size: 40px;
+    -fx-text-fill: black;
 }
