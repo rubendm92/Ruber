@@ -12,8 +12,16 @@ public class Professor {
         this.email = email;
     }
 
+    public String getDni() {
+        return dni;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -32,9 +40,5 @@ public class Professor {
     @Override
     public int hashCode() {
         return dni.hashCode();
-    }
-
-    public String getDni() {
-        return dni;
     }
 }

@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import ruber.core.model.ProfessorNotFoundException;
 import ruber.signatureapp.fake.Professors;
+import ruber.signatureapp.viewmodels.session.DniInputViewModel;
+import ruber.signatureapp.viewmodels.utils.Listener;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -51,7 +53,7 @@ public class SessionTests {
     @Test
     public void sessionNotifiesWhenDniIsCompleted() {
         Listener listener = mock(Listener.class);
-        session.setOnDniCompletedListener(listener);
+        session.addOnSessionStartedListener(listener);
         initSessionForProfessor();
         verify(listener).execute();
     }
@@ -59,7 +61,7 @@ public class SessionTests {
     @Test
     public void sessionNotifiesWhenSessionIsClosed() {
         Listener listener = mock(Listener.class);
-        session.setOnSessionClosedListener(listener);
+        session.addOnSessionClosedListener(listener);
         initSessionForProfessor();
         session.close();
         verify(listener).execute();

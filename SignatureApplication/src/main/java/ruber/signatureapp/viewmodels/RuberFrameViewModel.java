@@ -1,8 +1,13 @@
 package ruber.signatureapp.viewmodels;
 
+import ruber.core.model.Notification;
 import ruber.core.model.Professor;
-import ruber.core.model.ProfessorList;
+import ruber.core.model.Signature;
 import ruber.core.model.TeachingList;
+import ruber.signatureapp.viewmodels.utils.Listener;
+import ruber.signatureapp.views.Command;
+
+import java.time.LocalTime;
 
 public class RuberFrameViewModel {
 
@@ -10,45 +15,47 @@ public class RuberFrameViewModel {
     private final SessionViewModel session;
     private final SelectionViewModel selection;
 
+    private Listener onTeachingsSignedListener;
+    private Listener onNotificationWrittenListener;
+
     public RuberFrameViewModel(HeaderViewModel header, SessionViewModel session, SelectionViewModel selection) {
         this.header = header;
         this.session = session;
         this.selection = selection;
+        addListeners();
+    }
+
+    private void addListeners() {
+        session.addOnSessionStartedListener(() -> showTeachingsFor(session.getProfessor().getModel()));
+        session.addOnSessionClosedListener(() -> selection.clear());
+        session.setOnWriteNotificationListener(() -> selection.writeNotification());
+        selection.setOnProfessorSelectedListener(() -> showProfessorToReplace());
     }
 
     public void clear() {
+        session.close();
         selection.clear();
     }
 
-    public void showTeachings(TeachingList teachings) {
-        selection.showTeachings(teachings);
+    public void showTeachingsFor(Professor professor) {
+        selection.showTeachingsFor(professor);
     }
 
-    public void showProfessors(ProfessorList professors) {
-        selection.showProfessorsToReplace(professors);
+    public void showProfessors() {
+        selection.showProfessorsToReplace();
     }
 
     public void showProfessorToReplace() {
-    }
-
-    public Professor getProfessorToReplace() {
-        return selection.getProfessorToReplace();
+        session.setProfessorToReplace(selection.getProfessorToReplace());
+        selection.showTeachingsFor(selection.getProfessorToReplace().getModel());
     }
 
     public Professor getProfessorFromSession() {
-        return session.getProfessor();
+        return session.getProfessor().getModel();
     }
 
     public TeachingList getSelectedTeachings() {
         return selection.getSelectedTeachings();
-    }
-
-    public byte[] getSignature() {
-        return selection.getSignature();
-    }
-
-    public Professor getSelectedProfessor() {
-        return (selection.getProfessorToReplace() == null ? session.getProfessor() : selection.getProfessorToReplace());
     }
 
     public HeaderViewModel getHeader() {
@@ -57,5 +64,39 @@ public class RuberFrameViewModel {
 
     public SessionViewModel getSession() {
         return session;
+    }
+
+    public SelectionViewModel getSelection() {
+        return selection;
+    }
+
+    public void setOnNotificationWritten(Command onNotificationWritten) {
+        selection.setOnNotificationWritten(onNotificationWritten);
+    }
+
+    public void setOnTeachingsSigned(Command onTeachingsSigned) {
+        selection.setOnTeachingsSigned(onTeachingsSigned);
+    }
+
+    public void setOnTeachingsSignedListener(Listener onTeachingsSignedListener) {
+        this.onTeachingsSignedListener = onTeachingsSignedListener;
+    }
+
+    public void setOnNotificationWrittenListener(Listener onNotificationWrittenListener) {
+        this.onNotificationWrittenListener = onNotificationWrittenListener;
+    }
+
+    public Professor getSelectedProfessor() {
+        return (session.getProfessorToReplace() == null ? session.getProfessor().getModel() : session.getProfessorToReplace().getModel());
+    }
+
+    public void teachingsSigned() {
+        if (onTeachingsSignedListener != null)
+            onTeachingsSignedListener.execute();
+    }
+
+    public void notificationWritten() {
+        if (onNotificationWrittenListener != null)
+            onNotificationWrittenListener.execute();
     }
 }

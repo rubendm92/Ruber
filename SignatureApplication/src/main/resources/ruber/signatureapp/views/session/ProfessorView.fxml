@@ -3,11 +3,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.ProfessorViewController">
-    <stylesheets>
-        <URL value="@../main.css"/>
-    </stylesheets>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.session.ProfessorViewController">
     <padding>
         <Insets top="10" right="0" bottom="10" left="0"/>
     </padding>
@@ -22,9 +19,15 @@
         </VBox>
     </top>
     <bottom>
-        <VBox alignment="CENTER"  fx:id="closeSessionPanel" spacing="10">
+        <VBox alignment="CENTER">
             <Separator />
-            <Label alignment="CENTER">Cerrar</Label>
+            <VBox alignment="CENTER" fx:id="sendNotificationPanel">
+                <Label alignment="CENTER">Enviar notificación</Label>
+            </VBox>
+            <Separator />
+            <VBox alignment="CENTER" fx:id="closeSessionPanel">
+                <Label alignment="CENTER">Cerrar</Label>
+            </VBox>
         </VBox>
     </bottom>
 </BorderPane>

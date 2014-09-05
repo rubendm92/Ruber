@@ -1,10 +1,7 @@
 package ruber.core.persistence_db;
 
 import ruber.core.persistence.*;
-import ruber.core.persistence_db.implementation.DatabaseNotificationSaver;
-import ruber.core.persistence_db.implementation.DatabaseProfessorsLoader;
-import ruber.core.persistence_db.implementation.DatabaseSignedTeachingsSaver;
-import ruber.core.persistence_db.implementation.DatabaseTeachingsLoader;
+import ruber.core.persistence_db.implementation.*;
 import ruber.core.persistence_db.util.Database;
 import ruber.core.persistence_db.util.DatabaseProvider;
 
@@ -13,6 +10,7 @@ public class DatabasePersistenceProvider implements PersistenceProvider {
     private final Database database;
     private TeachingsLoader teachingsLoader;
     private ProfessorsLoader professorsLoader;
+    private NotificationTypesLoader notificationTypesLoader;
     private SignedTeachingsSaver signedTeachingsSaver;
     private NotificationSaver notificationSaver;
 
@@ -32,6 +30,13 @@ public class DatabasePersistenceProvider implements PersistenceProvider {
         if (professorsLoader == null)
             professorsLoader = new DatabaseProfessorsLoader(database);
         return professorsLoader;
+    }
+
+    @Override
+    public NotificationTypesLoader getNotificationTypesLoader() {
+        if (notificationTypesLoader == null)
+            notificationTypesLoader = new DatabaseNotificationTypesLoader(database);
+        return notificationTypesLoader;
     }
 
     @Override

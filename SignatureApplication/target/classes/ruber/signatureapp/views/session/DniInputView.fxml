@@ -3,12 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
 
-<BorderPane fx:id="dniInput" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.DniInputViewController">
-    <stylesheets>
-        <URL value="@../main.css"/>
-    </stylesheets>
+<BorderPane fx:id="dniInput" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.session.DniInputViewController">
     <padding>
         <Insets top="10" right="15" bottom="10" left="15"/>
     </padding>
@@ -53,4 +49,7 @@
             </VBox>
         </HBox>
     </center>
+    <bottom>
+        <Label wrapText="true" fx:id="dniError" visible="false">No hay ningún profesor en el sistema con este DNI</Label>
+    </bottom>
 </BorderPane>

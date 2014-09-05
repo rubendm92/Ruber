@@ -53,7 +53,7 @@ public class DatabaseSignedTeachingsSaver extends DataSaver implements SignedTea
         preparedStatement().setString(8, currentTeaching.getClassroom());
         preparedStatement().setTime(9, Time.valueOf(LocalTime.now()));
         preparedStatement().setString(10, professor.getName());
-        preparedStatement().setBinaryStream(11, new ByteArrayInputStream(currentTeaching.getSignatureBytes(professor)));
+        preparedStatement().setBinaryStream(11, new ByteArrayInputStream(currentTeaching.getSignatureBytes(currentTeaching.getProfessorForWhomSigned(professor))));
     }
 
     private static String getIp() {

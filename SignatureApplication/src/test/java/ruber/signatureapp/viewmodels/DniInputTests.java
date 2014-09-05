@@ -3,6 +3,7 @@ package ruber.signatureapp.viewmodels;
 import org.junit.Before;
 import org.junit.Test;
 import ruber.core.model.Observer;
+import ruber.signatureapp.viewmodels.session.DniInputViewModel;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

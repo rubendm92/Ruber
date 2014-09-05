@@ -1,0 +1,4 @@
+<?import javafx.scene.layout.HBox?>
+
+<HBox prefHeight="720" fx:id="professorListView" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.selection.ProfessorListViewController">
+</HBox>

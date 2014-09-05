@@ -2,3 +2,8 @@
 RuberCore/src/main/resources/ruber/persistence_db/config.xml
 RuberCore/src/test/resources/ruber/persistence_db/config.xml
 RuberCore/target
+out/
+.idea/
+*.png
+*.MF
+*.jpg

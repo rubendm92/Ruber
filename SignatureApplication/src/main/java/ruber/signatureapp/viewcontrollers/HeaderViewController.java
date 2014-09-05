@@ -1,5 +1,6 @@
 package ruber.signatureapp.viewcontrollers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -33,7 +34,7 @@ public class HeaderViewController implements Initializable, Observer {
 
     @Override
     public void changed() {
-        refresh();
+        Platform.runLater(this::refresh);
     }
 
     private void refresh() {

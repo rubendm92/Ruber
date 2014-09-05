@@ -3,6 +3,9 @@ package ruber.signatureapp.viewcontrollers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import ruber.signatureapp.viewcontrollers.session.DniInputViewController;
+import ruber.signatureapp.viewcontrollers.session.ProfessorViewController;
+import ruber.signatureapp.viewmodels.professor.ProfessorViewModel;
 import ruber.signatureapp.viewmodels.SessionViewModel;
 
 import java.net.URL;
@@ -27,9 +30,15 @@ public class SessionViewController implements Initializable {
     public void setViewModel(SessionViewModel viewModel) {
         this.viewModel = viewModel;
         dniInputViewController.setViewModel(viewModel.getDniInputViewModel());
-        professorViewController.setViewModel(viewModel);
-        viewModel.setOnDniCompletedListener(() -> startSession());
-        viewModel.setOnSessionClosedListener(() -> closeSession());
+        professorViewController.setSessionViewModel(viewModel);
+        viewModel.addOnSessionStartedListener(() -> startSession());
+        viewModel.addOnSessionClosedListener(() -> closeSession());
+        viewModel.setOnProfessorNotFoundListener(() -> dniInputViewController.showError());
+        viewModel.setOnProfessorToReplaceChangedListener(() -> showProfessorToReplace(viewModel.getProfessorToReplace()));
+    }
+
+    private void showProfessorToReplace(ProfessorViewModel professor) {
+        professorViewController.showProfessorToReplace(professor);
     }
 
     private void startSession() {

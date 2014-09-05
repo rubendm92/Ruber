@@ -106,4 +106,16 @@ public class Teaching {
         result = 31 * (31 * result + group.hashCode()) + schedule.hashCode();
         return result;
     }
+
+    public boolean isSignedFor(Professor professor) {
+        return signatures.get(professor) != null;
+    }
+
+    public Signature getProfessorSignature(Professor professor) {
+        return signatures.get(professor);
+    }
+
+    public Map<Professor, Signature> getSignatures() {
+        return signatures;
+    }
 }

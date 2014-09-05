@@ -1,0 +1,18 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<VBox alignment="CENTER" maxWidth="250" spacing="5.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.selection.SignatureViewController">
+    <Label fx:id="tabletLabel" />
+    <StackPane id="signaturePanel">
+        <Canvas visible="false" fx:id="canvas" height="200" width="250"/>
+        <ImageView fx:id="tabletImage">
+            <image>
+                <Image url="@sign.jpg"/>
+            </image>
+        </ImageView>
+    </StackPane>
+</VBox>

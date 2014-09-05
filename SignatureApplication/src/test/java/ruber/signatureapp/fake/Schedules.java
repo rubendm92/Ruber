@@ -14,6 +14,16 @@ public class Schedules {
         return new Schedule(LocalTime.of(10, 30), LocalTime.of(12, 30), "AULA 1-2");
     }
     public static Schedule now() {
-        return new Schedule(LocalTime.now().plusMinutes(30), LocalTime.now().plusMinutes(150), "AULA 1-2");
+        return new Schedule(start(), end(), "AULA 1-2");
+    }
+
+    private static LocalTime start() {
+        LocalTime time = LocalTime.now().plusMinutes(30);
+        return LocalTime.of(time.getHour(), time.getMinute());
+    }
+
+    private static LocalTime end() {
+        LocalTime time = LocalTime.now().plusMinutes(150);
+        return LocalTime.of(time.getHour(), time.getMinute());
     }
 }

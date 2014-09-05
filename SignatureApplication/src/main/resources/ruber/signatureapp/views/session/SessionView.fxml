@@ -1,5 +1,9 @@
 <?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
 <StackPane prefWidth="300" maxWidth="300" fx:id="panel" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.SessionViewController">
+    <stylesheets>
+        <URL value="@session.css"/>
+    </stylesheets>
     <fx:include fx:id="dniInputView" source="DniInputView.fxml" />
     <fx:include fx:id="professorView" source="ProfessorView.fxml" visible="false"/>
 </StackPane>

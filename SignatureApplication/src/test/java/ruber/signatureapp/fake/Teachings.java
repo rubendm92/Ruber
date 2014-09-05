@@ -39,6 +39,11 @@ public class Teachings {
     public static TeachingList nowList() {
         final TeachingList teachings = new TeachingList();
         teachings.add(Teachings.teachingNow());
+        teachings.add(Teachings.teachingNow());
+        teachings.add(Teachings.teachingNow());
+        teachings.add(Teachings.teachingNow());
+        teachings.add(Teachings.teachingNow());
+        teachings.add(Teachings.teachingNow());
         return teachings;
     }
 

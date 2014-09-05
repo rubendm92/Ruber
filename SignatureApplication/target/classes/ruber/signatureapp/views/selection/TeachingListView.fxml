@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.selection.TeachingListViewController">
+    <top>
+        <VBox alignment="CENTER" >
+            <VBox fx:id = "teachingListView" />
+            <Label fx:id="teachingMessage" wrapText="true" />
+            <Button fx:id="replacementButton" >Sustituir profesor</Button>
+        </VBox>
+    </top>
+    <center>
+        <VBox spacing="30"  alignment="CENTER" >
+            <fx:include visible="false" fx:id="signatureView" source="SignatureView.fxml" />
+        </VBox>
+    </center>
+</BorderPane>

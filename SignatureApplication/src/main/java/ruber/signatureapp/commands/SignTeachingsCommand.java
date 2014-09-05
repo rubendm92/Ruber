@@ -1,29 +1,48 @@
 package ruber.signatureapp.commands;
 
+import javafx.application.Platform;
+import ruber.core.mail.TeachingsReplacedMail;
+import ruber.core.mail.TeachingsSignedMail;
+import ruber.core.model.Professor;
 import ruber.core.model.Signature;
+import ruber.core.model.TeachingList;
 import ruber.core.persistence.SignedTeachingsSaver;
-import ruber.signatureapp.viewmodels.FrameViewModel;
+import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
+import ruber.signatureapp.viewmodels.RuberFrameViewModel;
 import ruber.signatureapp.views.Command;
-
-import java.time.LocalTime;
 
 public class SignTeachingsCommand implements Command {
 
-    private final FrameViewModel frame;
+    private final RuberFrameViewController frame;
     private final SignedTeachingsSaver saver;
+    private final TeachingsSignedMail teachingsSigned;
+    private final TeachingsReplacedMail teachingsReplaced;
 
-    public SignTeachingsCommand(FrameViewModel frame, SignedTeachingsSaver saver) {
+    public SignTeachingsCommand(RuberFrameViewController frame, SignedTeachingsSaver saver) {
         this.frame = frame;
         this.saver = saver;
+        this.teachingsSigned = new TeachingsSignedMail();
+        this.teachingsReplaced = new TeachingsReplacedMail();
     }
 
     @Override
     public void execute() {
-        frame.getSelectedTeachings().forEach(teaching -> teaching.sign(frame.getSelectedProfessor(), signature()));
-        saver.save(frame.getProfessorFromSession(), frame.getSelectedTeachings());
+        Platform.runLater(() -> sign());
     }
 
-    private Signature signature() {
-        return new Signature(frame.getProfessorFromSession(), LocalTime.now(), frame.getSignature());
+    private void sign() {
+        final TeachingList teachings = frame.getSelectedTeachings();
+        final Professor professor = frame.getProfessorFromSession();
+        final Professor selectedProfessor = frame.getSelectedProfessor();
+        final Signature signature = frame.getSignature();
+        new Thread(() -> process(teachings, professor, selectedProfessor, signature)).start();
+        frame.teachingsSigned();
+    }
+
+    private void process(TeachingList teachings, Professor professor, Professor selectedProfessor, Signature signature) {
+        teachings.forEach(teaching -> teaching.sign(selectedProfessor, signature));
+        saver.save(professor, teachings);
+        teachingsSigned.send(teachings, professor);
+        teachingsReplaced.send(teachings, professor);
     }
 }

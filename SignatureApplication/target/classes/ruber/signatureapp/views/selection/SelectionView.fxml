@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import java.net.URL?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.SelectionViewController">
+    <stylesheets>
+        <URL value="@selection.css" />
+    </stylesheets>
+    <fx:include visible="false" fx:id="teachingListView" source="TeachingListView.fxml"/>
+    <fx:include visible="false" fx:id="professorListView" source="ProfessorListPanelView.fxml"/>
+    <fx:include visible="false" fx:id="notificationsView" source="NotificationsView.fxml"/>
+</StackPane>

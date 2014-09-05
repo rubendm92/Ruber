@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane fx:id="teachingView" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.selection.TeachingViewController">
+    <left>
+        <StackPane alignment="CENTER" >
+            <CheckBox fx:id="selected" />
+        </StackPane>
+    </left>
+    <center>
+        <VBox>
+            <Label fx:id="subjectName" wrapText="true" />
+            <Label fx:id="schedule" />
+            <Label fx:id="classroom" />
+        </VBox>
+    </center>
+</BorderPane>

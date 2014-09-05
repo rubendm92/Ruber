@@ -32,7 +32,7 @@ public class TeachingTests {
 
     @Test
     public void getTeachingsGivenByProfessor() {
-        TeachingList resultList = Teachings.longList().getTeachingsForProfessor(Professors.ruben());
+        TeachingList resultList = Teachings.longList().getCurrentTeachingsForProfessor(Professors.ruben());
         List<Teaching> expectedList = Arrays.asList(Teachings.fso());
         assertThat(resultList, is(expectedList));
     }

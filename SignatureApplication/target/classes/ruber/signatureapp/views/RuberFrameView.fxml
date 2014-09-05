@@ -3,12 +3,8 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import java.net.URL?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" id="frame" fx:controller="ruber.signatureapp.viewcontrollers.RuberFrameViewController">
-    <stylesheets>
-        <URL value="@main.css"/>
-    </stylesheets>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #D9DEE4;" fx:controller="ruber.signatureapp.viewcontrollers.RuberFrameViewController">
     <top>
         <fx:include fx:id="headerView" source="header/HeaderView.fxml"/>
     </top>
@@ -18,4 +14,7 @@
             <Separator orientation="VERTICAL" />
         </HBox>
     </left>
+    <center>
+        <fx:include fx:id="selectionView" source="./selection/SelectionView.fxml"/>
+    </center>
 </BorderPane>

@@ -26,14 +26,14 @@ public class ProfessorSetter extends DataLoader<Void> {
     @Override
     protected String statement() {
         return "SELECT Profesores.Profesor, DNI, Correo " +
-                "FROM `Profesores`, `Horario-201314` " +
-                "WHERE `Periodo` = ? AND `DiaSemana`= ? AND `Titulacion` = ? AND `DescAsignatura` = ? AND `DescGrupo` = ? AND `Horario` = ? AND `DescLocal` = ? AND `Profesores`.`Profesor` = `Horario-201314`.`Profesor` " +
+                "FROM `Profesores`, `Horario` " +
+                "WHERE `Periodo` = ? AND `DiaSemana`= ? AND `Titulacion` = ? AND `DescAsignatura` = ? AND `DescGrupo` = ? AND `Horario` = ? AND `DescLocal` = ? AND `Profesores`.`Profesor` = `Horario`.`Profesor` " +
                 "ORDER BY `Horario`";
     }
 
     @Override
     protected void setStatementValues() throws SQLException {
-        preparedStatement().setString(1, "2C");
+        preparedStatement().setString(1, new SemesterCalculator(database).getSemester(day));
         preparedStatement().setString(2, DayOfWeekToStringTranslator.instance().dateToDayString(day));
         preparedStatement().setString(3, teaching.getDegree());
         preparedStatement().setString(4, teaching.getSubjectName());

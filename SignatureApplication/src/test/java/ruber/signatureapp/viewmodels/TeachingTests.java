@@ -3,6 +3,7 @@ package ruber.signatureapp.viewmodels;
 import org.junit.Before;
 import org.junit.Test;
 import ruber.signatureapp.fake.Teachings;
+import ruber.signatureapp.viewmodels.teaching.TeachingViewModel;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

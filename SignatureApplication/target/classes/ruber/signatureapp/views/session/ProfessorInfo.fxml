@@ -5,12 +5,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<?import java.net.URL?>
 
-<VBox alignment="CENTER_LEFT" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.ProfessorInfoViewController">
-    <stylesheets>
-        <URL value="@../main.css"/>
-    </stylesheets>
+<VBox alignment="CENTER_LEFT" spacing="15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.session.ProfessorInfoViewController">
     <padding>
         <Insets top="10" right="0" bottom="10" left="15"/>
     </padding>

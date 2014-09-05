@@ -6,6 +6,8 @@ public interface PersistenceProvider {
 
     public ProfessorsLoader getProfessorsLoader();
 
+    public NotificationTypesLoader getNotificationTypesLoader();
+
     public SignedTeachingsSaver getSignedTeachingsSaver();
 
     public NotificationSaver getNotificationSaver();

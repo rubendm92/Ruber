@@ -32,14 +32,14 @@ public class DatabaseTeachingsLoader extends DataLoader<TeachingList> implements
     @Override
     protected String statement() {
         return "SELECT DISTINCT Titulacion, DescAsignatura, DescGrupo, Horario, DescLocal " +
-                "from `Horario-201314` " +
-                "where Periodo = ? AND DiaSemana = ? AND `Titulacion` != '4801 - Doble Grado en ing. Inf. y Grado en Adm. y Direc.' " +
+                "from `Horario` " +
+                "where (Periodo = 'Anual' OR Periodo = ?) AND DiaSemana = ? AND `Titulacion` != '4801 - Doble Grado en ing. Inf. y Grado en Adm. y Direc.' " +
                 "ORDER BY `Horario`";
     }
 
     @Override
     protected void setStatementValues() throws SQLException {
-        preparedStatement().setString(1, "2C");
+        preparedStatement().setString(1, new SemesterCalculator(database).getSemester(day));
         preparedStatement().setString(2, DayOfWeekToStringTranslator.instance().dateToDayString(day));
     }
 

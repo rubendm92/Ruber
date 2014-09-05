@@ -9,7 +9,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="ruber.signatureapp.viewcontrollers.HeaderViewController">
     <stylesheets>
-        <URL value="@../main.css"/>
+        <URL value="@header.css"/>
     </stylesheets>
     <HBox id="bannerPanel" alignment="BASELINE_LEFT" spacing="150">
         <padding>

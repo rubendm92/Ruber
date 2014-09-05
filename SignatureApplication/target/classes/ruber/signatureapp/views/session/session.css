@@ -1,0 +1,62 @@
+* {
+    -fx-text-fill: black;
+    -fx-font-family: "Arial";
+}
+
+.dniLabel {
+    -fx-font-size: 30px;
+    -fx-pref-width: 200px;
+}
+
+.displayPanel {
+    -fx-max-width: 270px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+}
+
+#clearButton {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+}
+
+#keyboard Button {
+    -fx-font-size: 32px;
+    -fx-pref-height: 90px;
+    -fx-pref-width: 90px;
+}
+
+#clearPanel Separator {
+    -fx-orientation: vertical;
+}
+
+VBox Separator {
+    -fx-orientation: horizontal;
+}
+
+#closeSessionPanel {
+    -fx-max-width: 400px;
+    -fx-pref-height: 50px;
+    -fx-font-size: 40px;
+}
+
+#replacementLabel {
+    -fx-padding: 5px 0px 5px 15px;
+    -fx-font-size: 24px;
+}
+
+#dniError {
+    -fx-font-size: 18px;
+}
+
+#sendNotificationPanel {
+    -fx-font-size: 32px;
+    -fx-pref-height: 60px;
+}
+
+#professorName {
+    -fx-padding: 5px 5px 5px 0px;
+    -fx-font: 16px "Arial";
+}

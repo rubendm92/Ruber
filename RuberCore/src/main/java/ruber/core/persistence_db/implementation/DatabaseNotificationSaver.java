@@ -26,6 +26,7 @@ public class DatabaseNotificationSaver extends DataSaver implements Notification
     public void save(Professor professor, Notification notification) {
         this.professor = professor;
         this.notification = notification;
+        abstractSave();
     }
 
     @Override

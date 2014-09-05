@@ -32,15 +32,15 @@ public class RuberFrameViewModelTests {
 
     @Test
     public void callingMethodShowTeachingsShouldShowTeachingsInSelection() {
-        frame.showTeachings(Teachings.longList());
+        frame.showTeachingsFor(Professors.ruben());
 
-        verify(selection).showTeachings(Teachings.longList());
+        verify(selection).showTeachingsFor(Professors.ruben());
     }
 
     @Test
     public void callingMethodShowProfessorsShouldCallToMethodInSelection() {
-        frame.showProfessors(Professors.list());
+        frame.showProfessors();
 
-        verify(selection).showProfessorsToReplace(Professors.list());
+        verify(selection).showProfessorsToReplace();
     }
 }
