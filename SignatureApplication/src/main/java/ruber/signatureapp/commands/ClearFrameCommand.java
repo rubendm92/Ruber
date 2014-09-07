@@ -9,13 +9,11 @@ import ruber.signatureapp.views.Command;
 
 public class ClearFrameCommand implements Command {
 
-    private final RuberFrameViewModel viewModel;
     private final RuberFrameViewController viewController;
     private final SignedTeachingsSaver teachingsSaver;
     private final NotificationSaver notificationSaver;
 
-    public ClearFrameCommand(RuberFrameViewModel viewModel, RuberFrameViewController viewController, PersistenceProvider provider) {
-        this.viewModel = viewModel;
+    public ClearFrameCommand(RuberFrameViewController viewController, PersistenceProvider provider) {
         this.viewController = viewController;
         this.teachingsSaver = provider.getSignedTeachingsSaver();
         this.notificationSaver = provider.getNotificationSaver();
@@ -27,6 +25,7 @@ public class ClearFrameCommand implements Command {
             new SignTeachingsCommand(viewController, teachingsSaver).execute();
         else if (viewController.hasNotificationUnsaved())
             new SaveNotificationCommand(viewController, notificationSaver).execute();
-        viewModel.clear();
+        else
+            viewController.clear();
     }
 }

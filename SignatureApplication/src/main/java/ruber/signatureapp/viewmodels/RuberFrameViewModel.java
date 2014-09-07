@@ -27,7 +27,6 @@ public class RuberFrameViewModel {
 
     private void addListeners() {
         session.addOnSessionStartedListener(() -> showTeachingsFor(session.getProfessor().getModel()));
-        session.addOnSessionClosedListener(() -> selection.clear());
         session.setOnWriteNotificationListener(() -> selection.writeNotification());
         selection.setOnProfessorSelectedListener(() -> showProfessorToReplace());
     }
@@ -98,5 +97,9 @@ public class RuberFrameViewModel {
     public void notificationWritten() {
         if (onNotificationWrittenListener != null)
             onNotificationWrittenListener.execute();
+    }
+
+    public void addOnSessionClosedListener(Listener listener) {
+        session.setOnSessionClosedListener(listener);
     }
 }

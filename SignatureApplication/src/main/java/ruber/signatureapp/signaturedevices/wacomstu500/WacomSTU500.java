@@ -156,9 +156,16 @@ public class WacomSTU500 implements SignatureViewModel {
     }
 
     private void performAction() {
-        if (currentButton == ButtonsPanel.END && isWritten() && onSignatureFinishedListener != null)
-            onSignatureFinishedListener.execute();
+        if (currentButton == ButtonsPanel.END)
+            OnEndPressed();
         else if (currentButton == ButtonsPanel.CLEAR)
+            clear();
+    }
+
+    private void OnEndPressed() {
+        if (isWritten() && onSignatureFinishedListener != null)
+            onSignatureFinishedListener.execute();
+        else
             clear();
     }
 

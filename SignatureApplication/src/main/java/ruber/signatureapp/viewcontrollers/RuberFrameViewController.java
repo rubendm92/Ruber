@@ -67,7 +67,12 @@ public class RuberFrameViewController implements Initializable {
 
     private void refresh() {
         timer.stop();
-        Platform.runLater(() -> viewModel.clear());
+        Platform.runLater(this::clear);
+    }
+
+    public void clear() {
+        viewModel.clear();
+        sessionViewController.closeSession();
     }
 
     public Professor getProfessorFromSession() {

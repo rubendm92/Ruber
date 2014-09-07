@@ -61,7 +61,7 @@ public class SessionTests {
     @Test
     public void sessionNotifiesWhenSessionIsClosed() {
         Listener listener = mock(Listener.class);
-        session.addOnSessionClosedListener(listener);
+        //session.addOnSessionClosedListener(listener);
         initSessionForProfessor();
         session.close();
         verify(listener).execute();

@@ -14,10 +14,10 @@ import java.util.List;
 public class SessionViewModel implements Observer {
 
     private final DniInputViewModel dniInput;
-private final ProfessorList professors;
+    private final ProfessorList professors;
     private Professor professor;
     private List<Listener> onSessionStartedListeners;
-    private List<Listener> onSessionClosedListeners;
+    private Listener onSessionClosedListener;
     private Listener onWriteNotificationListener;
     private Listener onProfessorNotFoundListener;
     private Listener onProfessorToReplaceChangedListener;
@@ -28,7 +28,6 @@ private final ProfessorList professors;
         this.dniInput.addObserver(this);
         this.professors = professors;
         onSessionStartedListeners = new ArrayList<>();
-        onSessionClosedListeners = new ArrayList<>();
     }
 
     public ProfessorViewModel getProfessor() {
@@ -56,13 +55,14 @@ private final ProfessorList professors;
     }
 
     public void close() {
-        professor = null;
+        if (dniInput.isEmpty()) return;
         dniInput.clear();
-        onSessionClosedListeners.forEach(listener -> listener.execute());
+        if (onSessionClosedListener != null)
+            onSessionClosedListener.execute();
     }
 
-    public void addOnSessionClosedListener(Listener onSessionClosedListener) {
-        onSessionClosedListeners.add(onSessionClosedListener);
+    public void setOnSessionClosedListener(Listener onSessionClosedListener) {
+        this.onSessionClosedListener = onSessionClosedListener;
     }
 
     public void addOnSessionStartedListener(Listener onSessionStartedListener) {

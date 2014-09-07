@@ -19,6 +19,7 @@ import ruber.signatureapp.signaturedevices.wacomstu500.WacomSTU500;
 import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
 import ruber.signatureapp.viewmodels.*;
 import ruber.signatureapp.viewmodels.session.DniInputViewModel;
+import ruber.signatureapp.views.Command;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -45,12 +46,15 @@ public class SignatureApplication extends Application {
         Scene scene = new Scene(loader.load());
         frameViewController = loader.getController();
         frameViewModel = frameViewModel();
+        Timer timer = timer();
         frameViewController.setViewModel(frameViewModel);
-        setUpStage(primaryStage, scene, timer());
+        setUpStage(primaryStage, scene, timer);
     }
 
     private Timer timer() {
-        return new Timer(ONE_MINUTE, () -> Platform.runLater(() -> new ClearFrameCommand(frameViewModel, frameViewController, provider).execute()));
+        Command command = new ClearFrameCommand(frameViewController, provider);
+        frameViewModel.addOnSessionClosedListener(command::execute);
+        return new Timer(ONE_MINUTE, () -> Platform.runLater(command::execute));
     }
 
     private void setUpStage(Stage primaryStage, Scene scene, Timer timer) throws IOException {

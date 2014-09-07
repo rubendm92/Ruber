@@ -32,7 +32,6 @@ public class SessionViewController implements Initializable {
         dniInputViewController.setViewModel(viewModel.getDniInputViewModel());
         professorViewController.setSessionViewModel(viewModel);
         viewModel.addOnSessionStartedListener(() -> startSession());
-        viewModel.addOnSessionClosedListener(() -> closeSession());
         viewModel.setOnProfessorNotFoundListener(() -> dniInputViewController.showError());
         viewModel.setOnProfessorToReplaceChangedListener(() -> showProfessorToReplace(viewModel.getProfessorToReplace()));
     }
@@ -47,7 +46,7 @@ public class SessionViewController implements Initializable {
         professorViewController.setProfessor(viewModel.getProfessor());
     }
 
-    private void closeSession() {
+    public void closeSession() {
         dniInputView.setVisible(true);
         dniInputViewController.clear();
         professorView.setVisible(false);

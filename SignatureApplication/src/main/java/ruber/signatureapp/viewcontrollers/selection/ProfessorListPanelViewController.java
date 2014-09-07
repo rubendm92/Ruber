@@ -32,24 +32,20 @@ public class ProfessorListPanelViewController implements Initializable {
     public void setViewModel(ProfessorListViewModel viewModel) {
         this.viewModel = viewModel;
         professorListViewController.setViewModel(viewModel);
+        indexes = new HashMap<>();
+        pages.getChildren().removeAll(pages.getChildren());
         setNumberOfPages();
     }
 
     private void setNumberOfPages() {
-        indexes = new HashMap<>();
-        pages.getChildren().removeAll(pages.getChildren());
-        for(int pageNumber = 0; pageNumber < numberOfPages(); pageNumber++)
-            addPage(pageNumber);
+        for (int i = 0; i < viewModel.size(); i+=PROFESSORS_PER_PAGE)
+            addPage(i);
     }
 
-    private int numberOfPages() {
-        return Math.round((float) viewModel.size() / (float) PROFESSORS_PER_PAGE);
-    }
-
-    private void addPage(int page) {
-        int last = last(page * PROFESSORS_PER_PAGE);
-        String index = viewModel.get(first(page)).getName().charAt(0) + " - " + viewModel.get(last).getName().charAt(0);
-        indexes.put(index, new Index(first(page), last));
+    private void addPage(int first) {
+        int last = (viewModel.size() - first < PROFESSORS_PER_PAGE) ? viewModel.size() - 1 : first + PROFESSORS_PER_PAGE - 1;
+        String index = viewModel.get(first).getName().charAt(0) + " - " + viewModel.get(last).getName().charAt(0);
+        indexes.put(index, new Index(first, last));
         pages.getChildren().add(createLink(index));
     }
 
@@ -64,15 +60,7 @@ public class ProfessorListPanelViewController implements Initializable {
         professorListViewController.showProfessors(index);
     }
 
-    private int first(int pageNumber) {
-        return pageNumber * PROFESSORS_PER_PAGE;
-    }
-
-    private int last(int pageNumber) {
-        return (viewModel.size() - pageNumber < PROFESSORS_PER_PAGE) ? viewModel.size() - 1 : pageNumber + PROFESSORS_PER_PAGE - 1;
-    }
-
     public void showProfessors() {
-        professorListViewController.showProfessors(new Index(0, 11));
+        professorListViewController.showProfessors(new Index(0, PROFESSORS_PER_PAGE - 1));
     }
 }
