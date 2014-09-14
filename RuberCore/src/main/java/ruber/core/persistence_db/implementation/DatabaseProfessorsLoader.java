@@ -1,5 +1,6 @@
 package ruber.core.persistence_db.implementation;
 
+import ruber.core.log.Log;
 import ruber.core.model.Professor;
 import ruber.core.model.ProfessorList;
 import ruber.core.persistence.ProfessorsLoader;
@@ -8,8 +9,6 @@ import ruber.core.persistence_db.util.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseProfessorsLoader extends DataLoader<ProfessorList> implements ProfessorsLoader {
 
@@ -38,7 +37,7 @@ public class DatabaseProfessorsLoader extends DataLoader<ProfessorList> implemen
             while (set.next())
                 professorList.add(new Professor(set.getString("DNI"), set.getString("Profesor"), set.getString("Correo")));
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Log.getInstance().add(ex);
         }
         return professorList;
     }

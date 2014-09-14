@@ -3,6 +3,7 @@ package ruber.core.persistence_db.util;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import ruber.core.log.Log;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,7 +32,8 @@ public class DatabaseProvider {
     private static Element configData(String pathToConfigFile) {
         try {
             return (Element) configFile(pathToConfigFile).getElementsByTagName("database-configuration").item(0);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+            Log.getInstance().add(ex);
             throw new RuntimeException("Exception while loading database configuration");
         }
     }

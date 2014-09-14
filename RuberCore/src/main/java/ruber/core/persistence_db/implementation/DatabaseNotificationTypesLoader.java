@@ -1,5 +1,6 @@
 package ruber.core.persistence_db.implementation;
 
+import ruber.core.log.Log;
 import ruber.core.persistence.NotificationTypesLoader;
 import ruber.core.persistence_db.util.DataLoader;
 import ruber.core.persistence_db.util.Database;
@@ -31,7 +32,7 @@ public class DatabaseNotificationTypesLoader extends DataLoader<List<String>> im
             while (set.next())
                 types.add(set.getString("tipo"));
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Log.getInstance().add(ex);
         }
         return types;
     }

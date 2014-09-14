@@ -20,7 +20,6 @@ public class TeachingsReportMail extends MailSender{
     private static final String SUBJECT = "Informe de docencia del " + today();
 
     private final List<File> files;
-    private TeachingList teachings;
 
     public TeachingsReportMail(List<File> files) {
         super();
@@ -28,12 +27,10 @@ public class TeachingsReportMail extends MailSender{
     }
 
     public void sendReport(TeachingList teachings, String recipientAddress) {
-        this.teachings = teachings;
-        send(new Mail(recipientAddress, SUBJECT, content()));
-        removeFilesAfterSent();
+        send(new Mail(recipientAddress, SUBJECT, content(teachings)));
     }
 
-    private String content() {
+    private String content(TeachingList teachings) {
         return new TeachingsReporter().generate(teachings);
     }
 
@@ -65,11 +62,6 @@ public class TeachingsReportMail extends MailSender{
             setDataHandler(new DataHandler(fileDataSource));
             setFileName(fileDataSource.getName());
         }};
-    }
-
-
-    private void removeFilesAfterSent() {
-        files.forEach(file -> file.delete());
     }
 
     private static String today() {

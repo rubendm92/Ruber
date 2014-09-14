@@ -1,5 +1,6 @@
 package ruber.core.persistence_db.util;
 
+import ruber.core.log.Log;
 import ruber.core.model.Professor;
 import ruber.core.model.Signature;
 import ruber.core.model.Teaching;
@@ -53,8 +54,8 @@ public class SignatureSetter extends DataLoader<Void> {
         try {
             while (set.next())
                 teaching.sign(professor, signature(set));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
         return null;
     }

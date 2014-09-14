@@ -3,21 +3,17 @@ package ruber.core.mail;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import ruber.core.log.Log;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Properties;
 
 public abstract class MailSender {
 
@@ -31,7 +27,7 @@ public abstract class MailSender {
     }
 
     private void readUserAndPassword() {
-        Element element = configData("config\\mail.xml");
+        Element element = configData("config/mail.xml");
         username = getStringFromElement("username", element);
         password = getStringFromElement("password", element);
     }
@@ -39,7 +35,8 @@ public abstract class MailSender {
     private Element configData(String pathToConfigFile) {
         try {
             return (Element) configFile(pathToConfigFile).getElementsByTagName("session").item(0);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException ex) {
+            Log.getInstance().add(ex);
             throw new RuntimeException("Exception while loading mail configuration");
         }
     }
@@ -76,8 +73,8 @@ public abstract class MailSender {
     protected void send(Mail mail) {
         try {
             Transport.send(message(mail));
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        } catch (MessagingException ex) {
+            Log.getInstance().add(ex);
         }
     }
 

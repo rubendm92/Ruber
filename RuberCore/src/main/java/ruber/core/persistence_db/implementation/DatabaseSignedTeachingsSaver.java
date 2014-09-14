@@ -1,5 +1,6 @@
 package ruber.core.persistence_db.implementation;
 
+import ruber.core.log.Log;
 import ruber.core.model.Professor;
 import ruber.core.model.Teaching;
 import ruber.core.model.TeachingList;
@@ -60,6 +61,7 @@ public class DatabaseSignedTeachingsSaver extends DataSaver implements SignedTea
         try {
             return Inet4Address.getLocalHost().getHostAddress();
         } catch (UnknownHostException ex) {
+            Log.getInstance().add(ex);
             return "IPException";
         }
     }

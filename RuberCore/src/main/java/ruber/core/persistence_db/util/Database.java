@@ -1,5 +1,7 @@
 package ruber.core.persistence_db.util;
 
+import ruber.core.log.Log;
+
 import java.sql.*;
 
 public class Database {
@@ -20,16 +22,16 @@ public class Database {
     private void loadDriver() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Log.getInstance().add(ex);
         }
     }
 
     public void openConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + database, username, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
     }
 

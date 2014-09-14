@@ -1,5 +1,6 @@
 package ruber.core.persistence_db.implementation;
 
+import ruber.core.log.Log;
 import ruber.core.model.Schedule;
 import ruber.core.model.Subject;
 import ruber.core.model.Teaching;
@@ -49,8 +50,8 @@ public class DatabaseTeachingsLoader extends DataLoader<TeachingList> implements
         try {
             while (set.next())
                 teachingList.add(teaching(set));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
         addProfessors(teachingList);
         addSignatures(teachingList);

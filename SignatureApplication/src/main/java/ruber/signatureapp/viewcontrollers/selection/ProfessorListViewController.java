@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import ruber.core.log.Log;
 import ruber.signatureapp.viewcontrollers.selection.utils.Index;
 import ruber.signatureapp.viewmodels.professor.ProfessorListViewModel;
 import ruber.signatureapp.viewmodels.professor.ProfessorViewModel;
@@ -50,8 +51,8 @@ public class ProfessorListViewController implements Initializable {
     private void addView(FXMLLoader loader) {
         try {
             professorViews.add(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            Log.getInstance().add(ex);
         }
     }
 

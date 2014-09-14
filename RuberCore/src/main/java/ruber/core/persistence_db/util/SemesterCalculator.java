@@ -1,5 +1,7 @@
 package ruber.core.persistence_db.util;
 
+import ruber.core.log.Log;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,8 +36,8 @@ public class SemesterCalculator extends DataLoader<String>{
         try {
             while (set.next())
                 return set.getString("semestre");
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
         return "";
     }

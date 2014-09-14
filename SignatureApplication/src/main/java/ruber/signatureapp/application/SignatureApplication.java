@@ -6,8 +6,6 @@ import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ruber.core.model.Professor;
-import ruber.core.model.Teaching;
 import ruber.core.persistence.PersistenceProvider;
 import ruber.core.persistence_db.DatabasePersistenceProvider;
 import ruber.signatureapp.commands.ClearFrameCommand;
@@ -17,19 +15,20 @@ import ruber.signatureapp.model.Timer;
 import ruber.signatureapp.signaturedevices.SignatureViewModel;
 import ruber.signatureapp.signaturedevices.wacomstu500.WacomSTU500;
 import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
-import ruber.signatureapp.viewmodels.*;
+import ruber.signatureapp.viewmodels.HeaderViewModel;
+import ruber.signatureapp.viewmodels.RuberFrameViewModel;
+import ruber.signatureapp.viewmodels.SelectionViewModel;
+import ruber.signatureapp.viewmodels.SessionViewModel;
 import ruber.signatureapp.viewmodels.session.DniInputViewModel;
 import ruber.signatureapp.views.Command;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class SignatureApplication extends Application {
 
     private static final int ONE_MINUTE = 60 * 1000;
-    private static final String CONFIG_FILE = "config\\database.xml";
+    private static final String CONFIG_FILE = "config/database.xml";
     private static final String FRAME_VIEW = "/ruber/signatureapp/views/RuberFrameView.fxml";
     private PersistenceProvider provider;
     private RuberFrameViewController frameViewController;

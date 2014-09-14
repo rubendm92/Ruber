@@ -1,5 +1,7 @@
 package ruber.core.persistence_db.util;
 
+import ruber.core.log.Log;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,8 +32,8 @@ public abstract class DataLoader<Type> {
         try {
             set = database.executeSelectStatement(select());
             return doLoad(set);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
         return null;
     }
@@ -45,8 +47,8 @@ public abstract class DataLoader<Type> {
     private void closeConnection() {
         try {
             close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
     }
 

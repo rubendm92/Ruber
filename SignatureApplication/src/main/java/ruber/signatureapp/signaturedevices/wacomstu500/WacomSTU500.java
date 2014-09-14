@@ -8,6 +8,7 @@ import com.WacomGSS.STU.Protocol.ProtocolHelper;
 import com.WacomGSS.STU.STUException;
 import com.WacomGSS.STU.Tablet;
 import com.WacomGSS.STU.UsbDevice;
+import ruber.core.log.Log;
 import ruber.signatureapp.signaturedevices.SignatureViewModel;
 import ruber.signatureapp.signaturedevices.utils.DataPoint;
 import ruber.signatureapp.viewmodels.utils.Listener;
@@ -34,8 +35,8 @@ public class WacomSTU500 implements SignatureViewModel {
     public WacomSTU500() {
         try {
             loadDll();
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (NoSuchFieldException | IllegalAccessException ex) {
+            Log.getInstance().add(ex);
         }
     }
 
@@ -88,8 +89,8 @@ public class WacomSTU500 implements SignatureViewModel {
     private void initCapability() {
         try {
             capability = tablet.getCapability();
-        } catch (STUException e) {
-            e.printStackTrace();
+        } catch (STUException ex) {
+            Log.getInstance().add(ex);
         }
     }
 
@@ -97,8 +98,8 @@ public class WacomSTU500 implements SignatureViewModel {
         tabletImage = new TabletBufferedImage(capability.getScreenWidth(), capability.getScreenHeight(), BufferedImage.TYPE_INT_RGB);
         try {
             tablet.writeImage(EncodingMode.EncodingMode_1bit, ProtocolHelper.flatten(tabletImage, tabletImage.getWidth(), tabletImage.getHeight(), false));
-        } catch (STUException e) {
-            e.printStackTrace();
+        } catch (STUException ex) {
+            Log.getInstance().add(ex);
         }
     }
 
@@ -108,6 +109,7 @@ public class WacomSTU500 implements SignatureViewModel {
         try {
             tablet.setClearScreen();
         } catch (STUException ex) {
+            Log.getInstance().add(ex);
         }
         tablet.disconnect();
         points.clear();

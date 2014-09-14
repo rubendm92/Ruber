@@ -1,9 +1,9 @@
 package ruber.core.persistence_db.util;
 
+import ruber.core.log.Log;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class DataSaver {
     
@@ -29,7 +29,7 @@ public abstract class DataSaver {
         try {
             database.executeUpdateStatement(update());
         } catch (SQLException ex) {
-            Logger.getLogger(DataSaver.class.getName()).log(Level.SEVERE, null, ex);
+            Log.getInstance().add(ex);
         }
     }
     
@@ -44,7 +44,7 @@ public abstract class DataSaver {
             statement.close();
             database.closeConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(DataSaver.class.getName()).log(Level.SEVERE, null, ex);
+            Log.getInstance().add(ex);
         }
     }
     

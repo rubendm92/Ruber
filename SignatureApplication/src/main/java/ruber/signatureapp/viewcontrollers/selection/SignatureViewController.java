@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import ruber.core.log.Log;
 import ruber.signatureapp.signaturedevices.SignatureViewModel;
 import ruber.signatureapp.signaturedevices.utils.DataPoint;
 
@@ -82,8 +83,8 @@ public class SignatureViewController implements Initializable {
             baos.flush();
             signature = baos.toByteArray();
             baos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            Log.getInstance().add(ex);
         }
         viewModel.getPoints().clear();
         return signature;

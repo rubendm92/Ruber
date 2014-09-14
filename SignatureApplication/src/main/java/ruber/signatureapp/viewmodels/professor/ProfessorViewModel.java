@@ -35,4 +35,10 @@ public class ProfessorViewModel extends SelectableItemViewModel {
     private boolean exists(String extension) {
         return new File(PATH_TO_IMAGES + professor.getDni() + extension).isFile();
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null || object.getClass() != getClass()) return false;
+        return professor.equals(((ProfessorViewModel) object).getModel());
+    }
 }

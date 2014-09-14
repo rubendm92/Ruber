@@ -12,8 +12,7 @@ public class DniInputViewModel extends Observable {
     }
 
     public void type(char character) {
-        if (isCompleted())
-            return;
+        if (isCompleted()) return;
         if (input.equals("DNI"))
             input = "";
         input += character;

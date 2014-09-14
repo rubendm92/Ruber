@@ -118,4 +118,10 @@ public class Teaching {
     public Map<Professor, Signature> getSignatures() {
         return signatures;
     }
+
+    public boolean isSigned() {
+        for (Signature signature : signatures.values())
+            if (signature != null) return true;
+        return false;
+    }
 }

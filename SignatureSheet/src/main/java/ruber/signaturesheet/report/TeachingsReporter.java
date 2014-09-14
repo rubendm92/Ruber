@@ -13,11 +13,13 @@ public class TeachingsReporter {
     private String numberOfTeachingsSigned;
     private String unsignedTeachings;
     private String replacements;
+    private String professorsThatDidNotSigned;
 
     public String generate(TeachingList teachings) {
         this.teachings = teachings;
         initAttributes();
         checkIfTeachingsWereSigned();
+        checkProfessorsThatDidNotSigned();
         checkIfThereWereReplacements();
         return report();
     }
@@ -25,6 +27,7 @@ public class TeachingsReporter {
     private void initAttributes() {
         numberOfTeachingsSigned = "";
         unsignedTeachings = "";
+        professorsThatDidNotSigned = "";
         replacements = "";
     }
 
@@ -32,13 +35,11 @@ public class TeachingsReporter {
         int numberOfTeachings = 0;
         int numberOfSignedTeachings = 0;
         for (Teaching teaching : teachings) {
-            for (Map.Entry<Professor,Signature> professorSignatureEntry : teaching.getSignatures().entrySet()) {
-                numberOfTeachings++;
-                if (professorSignatureEntry.getValue() != null)
-                    numberOfSignedTeachings++;
-                else
-                    addUnsignedTeaching(teaching, professorSignatureEntry.getKey());
-            }
+            numberOfTeachings++;
+            if (teaching.isSigned())
+                numberOfSignedTeachings++;
+            else
+                addUnsignedTeaching(teaching);
         }
         if (numberOfSignedTeachings != numberOfTeachings) {
             numberOfTeachingsSigned = "Docencia firmada " + numberOfSignedTeachings + "/" + numberOfTeachings;
@@ -48,8 +49,20 @@ public class TeachingsReporter {
             numberOfTeachingsSigned = "Toda la docencia fue firmada";
     }
 
-    private void addUnsignedTeaching(Teaching teaching, Professor professor) {
-        unsignedTeachings += "- " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + professor.getName() + "\n";
+    private void addUnsignedTeaching(Teaching teaching) {
+        unsignedTeachings += "- " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + teaching.getGroup() + ", " + teaching.getDegree() + "\n";
+    }
+
+    private void checkProfessorsThatDidNotSigned() {
+        for (Teaching teaching : teachings)
+            teaching.getSignatures().entrySet().forEach(entry -> {
+                if (entry.getValue() == null)
+                    professorsThatDidNotSigned += "- " + entry.getKey().getName() + ", " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + teaching.getGroup() + ", " + teaching.getDegree() + "\n";
+            });
+        if (professorsThatDidNotSigned.isEmpty())
+            professorsThatDidNotSigned = "Todos los profesores firmaron";
+        else
+            professorsThatDidNotSigned = "Profesores que no firmaron su docencia: \n" + professorsThatDidNotSigned;
     }
 
     private void checkIfThereWereReplacements() {
@@ -57,15 +70,21 @@ public class TeachingsReporter {
             for (Map.Entry<Professor,Signature> professorSignatureEntry : teaching.getSignatures().entrySet()) {
                 if (professorSignatureEntry.getValue() == null) continue;
                 if (professorSignatureEntry.getKey().equals(professorSignatureEntry.getValue().getProfessor())) continue;
-                replacements += "- " + professorSignatureEntry.getKey().getName() + " sustituido por " + professorSignatureEntry.getValue().getProfessor().getName() + "\n";
+                if (replacements.contains(replacement(professorSignatureEntry))) continue;
+                replacements += "- " + replacement(professorSignatureEntry) + "\n";
             }
         }
         if (!replacements.equals(""))
             replacements = "Sustituciones:\n" + replacements;
     }
 
+    private String replacement(Map.Entry<Professor, Signature> professorSignatureEntry) {
+        return professorSignatureEntry.getKey().getName() + " sustituido por " + professorSignatureEntry.getValue().getProfessor().getName();
+    }
+
     private String report() {
         return numberOfTeachingsSigned +
+                "\n\n" + professorsThatDidNotSigned +
                 (unsignedTeachings.equals("") ? "" : "\n\n" + unsignedTeachings) +
                 (replacements.equals("") ? "" : "\n\n" + replacements);
     }

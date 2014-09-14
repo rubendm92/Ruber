@@ -5,11 +5,10 @@ import com.itextpdf.text.pdf.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 
 public class PageHeader extends PdfPageEventHelper {
 
-    private static final String HEADER_IMAGE = "images\\header.png";
+    private static final String HEADER_IMAGE = "images/header.png";
     private final String degree;
     private PdfTemplate total;
 

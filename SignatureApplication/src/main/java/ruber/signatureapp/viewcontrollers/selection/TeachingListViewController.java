@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import ruber.core.log.Log;
 import ruber.core.model.Observer;
 import ruber.signatureapp.viewmodels.teaching.TeachingListViewModel;
 import ruber.signatureapp.viewmodels.teaching.TeachingViewModel;
@@ -54,6 +55,7 @@ public class TeachingListViewController implements Initializable, Observer {
         try {
             add(teachingViewModel);
         } catch (IOException ex) {
+            Log.getInstance().add(ex);
         }
     }
 

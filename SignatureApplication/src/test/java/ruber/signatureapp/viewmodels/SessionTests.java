@@ -4,8 +4,8 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
 import org.junit.Test;
-import ruber.core.model.ProfessorNotFoundException;
 import ruber.signatureapp.fake.Professors;
+import ruber.signatureapp.viewmodels.professor.ProfessorViewModel;
 import ruber.signatureapp.viewmodels.session.DniInputViewModel;
 import ruber.signatureapp.viewmodels.utils.Listener;
 
@@ -28,13 +28,16 @@ public class SessionTests {
     @Test
     public void whenDniIsCompletedSessionShouldBeStartedForProfessorWithThatDni() {
         initSessionForProfessor();
-        assertThat(session.getProfessor(), is(Professors.ruben()));
+        assertThat(session.getProfessor(), is(new ProfessorViewModel(Professors.ruben())));
     }
 
-    @Test(expected = ProfessorNotFoundException.class)
-    public void whenThereIsNoProfessorForDniItShouldThrowAnException() {
+    @Test
+    public void sessionNotifiesWhenThereIsNoProfessorForDni() {
+        Listener listener = mock(Listener.class);
+        session.setOnProfessorNotFoundListener(listener);
         for (char character : "12312322".toCharArray())
             dniInput.type(character);
+        verify(listener).execute();
     }
 
     @Test
@@ -42,7 +45,7 @@ public class SessionTests {
         initSessionForProfessor();
         session.close();
         assertThat(session.getProfessor(), IsNull.nullValue());
-        assertThat(dniInput.getInput(), Is.is(""));
+        assertThat(dniInput.getInput(), Is.is("DNI"));
     }
 
     private void initSessionForProfessor() {
@@ -61,7 +64,7 @@ public class SessionTests {
     @Test
     public void sessionNotifiesWhenSessionIsClosed() {
         Listener listener = mock(Listener.class);
-        //session.addOnSessionClosedListener(listener);
+        session.setOnSessionClosedListener(listener);
         initSessionForProfessor();
         session.close();
         verify(listener).execute();

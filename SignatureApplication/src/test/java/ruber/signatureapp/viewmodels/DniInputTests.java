@@ -48,7 +48,7 @@ public class DniInputTests {
 
         dniInput.clear();
 
-        assertThat(dniInput.getInput(), is(""));
+        assertThat(dniInput.getInput(), is("DNI"));
     }
 
     @Test

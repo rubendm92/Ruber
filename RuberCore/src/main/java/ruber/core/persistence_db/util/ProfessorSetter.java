@@ -1,6 +1,7 @@
 package ruber.core.persistence_db.util;
 
 
+import ruber.core.log.Log;
 import ruber.core.model.Professor;
 import ruber.core.model.Teaching;
 
@@ -47,8 +48,8 @@ public class ProfessorSetter extends DataLoader<Void> {
         try {
             while (set.next())
                 teaching.addProfessor(new Professor(set.getString("DNI"), set.getString("Profesor"), set.getString("Correo")));
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Log.getInstance().add(ex);
         }
         return null;
     }

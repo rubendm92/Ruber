@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 public class Schedule {
 
-    private static final int TWO_HOURS = 7200;
+    private static final int ONE_HOUR = 60 * 60;
 
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -46,11 +46,19 @@ public class Schedule {
         return startTime.toString() + "-" + endTime.toString();
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    public boolean canBeSigned(LocalTime time) {
+        return oneHourBeforeStart(time) || betweenSchedule(time) ||oneHourAfterEnd(time);
     }
 
-    public boolean canBeSigned(LocalTime time) {
-        return (Math.abs(getStartTime().toSecondOfDay() - time.toSecondOfDay()) <= TWO_HOURS);
+    private boolean oneHourBeforeStart(LocalTime time) {
+        return (Math.abs(startTime.toSecondOfDay() - time.toSecondOfDay()) <= ONE_HOUR);
+    }
+
+    private boolean betweenSchedule(LocalTime time) {
+        return time.isAfter(startTime) && time.isBefore(endTime);
+    }
+
+    private boolean oneHourAfterEnd(LocalTime time) {
+        return (Math.abs(endTime.toSecondOfDay() - time.toSecondOfDay()) <= ONE_HOUR);
     }
 }
