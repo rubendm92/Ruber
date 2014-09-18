@@ -21,11 +21,13 @@ import java.util.Map;
 
 public class ItextSignatureSheetGenerator implements SignatureSheetGenerator{
 
+    private final LocalDate date;
     private String degree;
     private TeachingList teachings;
     private ProfessorList professors;
 
-    public ItextSignatureSheetGenerator() {
+    public ItextSignatureSheetGenerator(LocalDate date) {
+        this.date = date;
     }
 
     @Override
@@ -34,9 +36,7 @@ public class ItextSignatureSheetGenerator implements SignatureSheetGenerator{
         this.professors = professors;
         List<File> files = new ArrayList<>();
         Map<String, TeachingList> teachingsByDegree = list.getByDegree();
-        teachingsByDegree.entrySet().forEach(entry -> {
-            files.add(generateSheet(entry.getKey(), entry.getValue(), professors));
-        });
+        teachingsByDegree.entrySet().forEach(entry -> files.add(generateSheet(entry.getKey(), entry.getValue(), professors)));
         return files;
     }
 
@@ -56,9 +56,9 @@ public class ItextSignatureSheetGenerator implements SignatureSheetGenerator{
     }
 
     private File generate(Document document) throws DocumentException, FileNotFoundException {
-        String fileName = "Firmas - " + LocalDate.now().toString() + " " + degree + ".pdf";
+        String fileName = "Firmas - " + date.toString() + " " + degree + ".pdf";
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileName));
-        writer.setPageEvent(new PageHeader(degree));
+        writer.setPageEvent(new PageHeader(degree, date));
         document.open();
         document.add(new TeachingsTable(teachings, professors));
         return new File(fileName);

@@ -10,13 +10,13 @@ public class TeachingList extends ArrayList<Teaching> {
 
     public TeachingList getCurrentTeachingsForProfessor(Professor professor) {
         TeachingList list = new TeachingList();
-        teachingsThatCanBeSigned(LocalTime.now()).filter((teaching) -> teaching.isGivenBy(professor)).forEach((teaching) -> list.add(teaching));
+        teachingsThatCanBeSigned(LocalTime.now()).filter(teaching -> teaching.isGivenBy(professor)).forEach(list::add);
         return list;
     }
 
     public TeachingList getAllTeachingsForProfessor(Professor professor) {
         TeachingList list = new TeachingList();
-        stream().filter((teaching) -> teaching.isGivenBy(professor)).forEach((teaching) -> list.add(teaching));
+        stream().filter(teaching -> teaching.isGivenBy(professor)).forEach(list::add);
         return list;
     }
 

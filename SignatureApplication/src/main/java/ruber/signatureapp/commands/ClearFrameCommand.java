@@ -4,7 +4,6 @@ import ruber.core.persistence.NotificationSaver;
 import ruber.core.persistence.PersistenceProvider;
 import ruber.core.persistence.SignedTeachingsSaver;
 import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
-import ruber.signatureapp.viewmodels.RuberFrameViewModel;
 import ruber.signatureapp.views.Command;
 
 public class ClearFrameCommand implements Command {

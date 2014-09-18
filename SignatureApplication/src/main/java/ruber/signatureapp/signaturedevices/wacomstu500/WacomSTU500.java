@@ -52,9 +52,9 @@ public class WacomSTU500 implements SignatureViewModel {
         if (tablet != null) return;
         tablet = new Tablet();
         if ((UsbDevice.getUsbDevices() == null) || UsbDevice.getUsbDevices().length <= 0)
-            throw new RuntimeException("No devices present");
+            Log.getInstance().add(new RuntimeException("No devices present"));
         if (tablet.usbConnect(UsbDevice.getUsbDevices()[0], true) != 0)
-            throw new RuntimeException("Connect failed");
+            Log.getInstance().add(new RuntimeException("Connect failed"));
         initTablet();
     }
 

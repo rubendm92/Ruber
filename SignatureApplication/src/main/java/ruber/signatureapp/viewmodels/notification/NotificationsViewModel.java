@@ -1,8 +1,6 @@
 package ruber.signatureapp.viewmodels.notification;
 
-import ruber.core.model.Notification;
 import ruber.signatureapp.signaturedevices.SignatureViewModel;
-import ruber.signatureapp.viewmodels.utils.Listener;
 
 import java.util.List;
 

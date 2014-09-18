@@ -2,6 +2,8 @@ package ruber.signatureapp.viewcontrollers.selection;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 public class SignatureViewController implements Initializable {
 
     private static final double SCALE_SIGNATURE = 2.56;
+    private static final Event SIGNING = new Event(new EventType<>("Signing"));
 
     @FXML
     private Canvas canvas;
@@ -51,7 +54,7 @@ public class SignatureViewController implements Initializable {
     private void initialize(String message) {
         tabletLabel.setVisible(true);
         tabletLabel.setText(message);
-        new Thread(() -> viewModel.enable()).start();
+        new Thread(viewModel::enable).start();
         viewModel.setOnSignatureChangedListener(() -> Platform.runLater(this::draw));
     }
 
@@ -69,6 +72,7 @@ public class SignatureViewController implements Initializable {
     }
 
     private void draw() {
+        canvas.fireEvent(SIGNING);
         clear();
         graphics().setStroke(Color.BLACK);
         for (int i = 1; i < viewModel.getPoints().size(); i++)
@@ -108,5 +112,4 @@ public class SignatureViewController implements Initializable {
     public boolean isWritten() {
         return viewModel.isWritten();
     }
-
 }

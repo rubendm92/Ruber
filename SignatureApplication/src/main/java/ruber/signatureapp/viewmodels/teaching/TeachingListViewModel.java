@@ -2,6 +2,7 @@ package ruber.signatureapp.viewmodels.teaching;
 
 import ruber.signatureapp.signaturedevices.SignatureViewModel;
 import ruber.signatureapp.viewmodels.utils.Listener;
+import ruber.signatureapp.viewmodels.utils.SelectableItemViewModel;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,6 @@ public class TeachingListViewModel extends ArrayList<TeachingViewModel> {
     }
 
     public boolean areThereTeachingsSelected() {
-        return stream().anyMatch(teaching -> teaching.isSelected());
+        return stream().anyMatch(SelectableItemViewModel::isSelected);
     }
 }

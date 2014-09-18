@@ -84,8 +84,8 @@ public class TeachingsReporter {
 
     private String report() {
         return numberOfTeachingsSigned +
-                "\n\n" + professorsThatDidNotSigned +
                 (unsignedTeachings.equals("") ? "" : "\n\n" + unsignedTeachings) +
+                "\n\n" + professorsThatDidNotSigned +
                 (replacements.equals("") ? "" : "\n\n" + replacements);
     }
 }

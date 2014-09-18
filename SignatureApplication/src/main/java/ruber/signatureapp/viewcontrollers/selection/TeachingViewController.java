@@ -23,6 +23,8 @@ public class TeachingViewController implements Initializable {
     @FXML
     private Label classroom;
     @FXML
+    private Label group;
+    @FXML
     private CheckBox selected;
     private TeachingViewModel viewModel;
 
@@ -53,6 +55,7 @@ public class TeachingViewController implements Initializable {
         subjectName.setText(viewModel.getFormattedSubjectName());
         schedule.setText(viewModel.getStringSchedule());
         classroom.setText(viewModel.getClassroom());
+        group.setText(viewModel.getGroup());
     }
 
     private void refreshStyle() {

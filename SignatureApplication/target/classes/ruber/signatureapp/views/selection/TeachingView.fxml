@@ -17,6 +17,7 @@
             <Label fx:id="subjectName" wrapText="true" />
             <Label fx:id="schedule" />
             <Label fx:id="classroom" />
+            <Label fx:id="group" />
         </VBox>
     </center>
 </BorderPane>

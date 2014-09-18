@@ -31,7 +31,7 @@ public class ProfessorViewController implements Initializable {
         initView();
     }
 
-    protected void initView() {
+    private void initView() {
         professorImage.setImage(new Image("file:" + professorViewModel.getImagePath()));
         professorName.setText(professorViewModel.getName());
     }

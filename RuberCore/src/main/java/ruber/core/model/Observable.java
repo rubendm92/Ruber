@@ -7,7 +7,7 @@ public abstract class Observable {
 
     private final List<Observer> observerList;
 
-    public Observable() {
+    protected Observable() {
         this.observerList = new ArrayList<>();
     }
 
@@ -19,7 +19,7 @@ public abstract class Observable {
         observerList.remove(observer);
     }
 
-    public void notifyChanges() {
-        observerList.forEach((observer) -> observer.changed());
+    protected void notifyChanges() {
+        observerList.forEach(Observer::changed);
     }
 }

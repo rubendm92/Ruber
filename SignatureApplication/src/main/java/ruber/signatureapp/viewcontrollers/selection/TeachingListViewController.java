@@ -46,7 +46,7 @@ public class TeachingListViewController implements Initializable, Observer {
 
     public void showTeachings() {
         restartComponents();
-        teachings.forEach(teaching -> addTeaching(teaching));
+        teachings.forEach(this::addTeaching);
         replacementButton.setVisible(true);
         signatureEnabled();
     }
@@ -121,5 +121,11 @@ public class TeachingListViewController implements Initializable, Observer {
     public void clear() {
         if (signatureViewController != null)
             signatureViewController.disconnect();
+    }
+
+    public void signing() {
+        replacementButton.setVisible(false);
+        teachingMessage.setVisible(true);
+        teachingMessage.setText("Firmando su docencia...");
     }
 }

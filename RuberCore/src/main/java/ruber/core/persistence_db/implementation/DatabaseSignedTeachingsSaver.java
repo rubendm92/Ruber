@@ -29,7 +29,7 @@ public class DatabaseSignedTeachingsSaver extends DataSaver implements SignedTea
     @Override
     public void save(Professor professor, TeachingList teachings) {
         this.professor = professor;
-        teachings.stream().forEach((teaching) -> saveTeaching(teaching));
+        teachings.stream().forEach(this::saveTeaching);
     }
 
     private void saveTeaching(Teaching teaching) {

@@ -41,11 +41,11 @@ public class SelectionViewModel {
         teachingsViewModel = new TeachingListViewModel(signatureViewModel);
         professors = new ProfessorListViewModel();
         notificationsViewModel = new NotificationsViewModel(notificationTypes, signatureViewModel);
-        teachingsViewModel.setOnShowProfessorListener(() -> showProfessorsToReplace());
+        teachingsViewModel.setOnShowProfessorListener(this::showProfessorsToReplace);
     }
 
     public void showTeachingsFor(Professor professor) {
-        teachingsViewModel.setOnTeachingsSignedListener(() -> onTeachingsSigned.execute());
+        teachingsViewModel.setOnTeachingsSignedListener(onTeachingsSigned::execute);
         currentProfessor = professor;
         teachingsViewModel.clear();
         unsignedTeachings(professor).forEach(teaching -> teachingsViewModel.add(new TeachingViewModel(teaching)));

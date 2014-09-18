@@ -16,10 +16,7 @@ class ButtonsPanel extends BufferedImage {
     public static final String END = "Terminar";
     public static final String CLEAR = "Borrar";
     private static final int NUMBER_OF_BUTTONS = 2;
-    
-    private Rectangle endButton;
-    private Rectangle clearButton;
-    
+
     public ButtonsPanel(int width,int height) {
         super(width, height, TYPE_INT_RGB);
         generateImage();
@@ -35,8 +32,8 @@ class ButtonsPanel extends BufferedImage {
 
     private void generateModel(Graphics2D g2d) {
         g2d.setStroke(new BasicStroke(2));
-        endButton = new Rectangle(2, 0, getWidth() / NUMBER_OF_BUTTONS, getHeight());
-        clearButton = new Rectangle((getWidth() / NUMBER_OF_BUTTONS) + 2, 0, getWidth() / NUMBER_OF_BUTTONS, getHeight());
+        Rectangle endButton = new Rectangle(2, 0, getWidth() / NUMBER_OF_BUTTONS, getHeight());
+        Rectangle clearButton = new Rectangle((getWidth() / NUMBER_OF_BUTTONS) + 2, 0, getWidth() / NUMBER_OF_BUTTONS, getHeight());
         g2d.drawRect(endButton.x, endButton.y, endButton.width, endButton.height);
         g2d.setFont(new Font("Arial", Font.PLAIN, 50));
         g2d.drawString(END, endButton.x + (endButton.width / 2) - (getTextDimension(END, g2d, new Font("Arial", Font.PLAIN, 50)).width / 2), endButton.y + (endButton.height / 2) + (getTextDimension(END, g2d, new Font("Arial", Font.PLAIN, 50)).height / 2));

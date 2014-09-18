@@ -36,7 +36,7 @@ public class FileSignedTeachingsSaver implements SignedTeachingsSaver {
     public void save(Professor professor, TeachingList teachings) {
         text = "";
         this.professor = professor;
-        teachings.forEach(teaching -> save(teaching));
+        teachings.forEach(this::save);
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream(new File(filename), true));
             writer.println(text);
@@ -56,19 +56,7 @@ public class FileSignedTeachingsSaver implements SignedTeachingsSaver {
         text += teaching.getGroup() + ";";
         text += teaching.getClassroom() + ";";
         text += Time.valueOf(LocalTime.now()) + ";";
-        text += professor.getName() + ";";
-        text +=  "0x" + bytesToHex(teaching.getSignatureBytes(teaching.getProfessorForWhomSigned(professor))) + "\n";
-    }
-
-    private String bytesToHex(byte[] bytes) {
-        final char[] hexArray = "0123456789ABCDEF".toCharArray();
-        char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-        }
-        return new String(hexChars);
+        text += professor.getName()+ "\n";
     }
 
     private static String getIp() {

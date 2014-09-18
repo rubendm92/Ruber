@@ -35,8 +35,8 @@ public class RuberFrameViewController implements Initializable {
         headerViewController.setViewModel(viewModel.getHeader());
         sessionViewController.setViewModel(viewModel.getSession());
         selectionViewController.setViewModel(viewModel.getSelection());
-        this.viewModel.setOnTeachingsSignedListener(() -> signed());
-        this.viewModel.setOnNotificationWrittenListener(() -> written());
+        this.viewModel.setOnTeachingsSignedListener(this::signed);
+        this.viewModel.setOnNotificationWrittenListener(this::written);
     }
 
     private void signed() {
@@ -61,7 +61,7 @@ public class RuberFrameViewController implements Initializable {
     }
 
     private void waitToClear() {
-        timer = new Timer(THREE_SECONDS, () -> refresh());
+        timer = new Timer(THREE_SECONDS, this::refresh);
         timer.start();
     }
 
@@ -98,5 +98,9 @@ public class RuberFrameViewController implements Initializable {
 
     public boolean hasNotificationUnsaved() {
         return selectionViewController.hasNotificationUnsaved();
+    }
+
+    public void signing() {
+        selectionViewController.signing();
     }
 }

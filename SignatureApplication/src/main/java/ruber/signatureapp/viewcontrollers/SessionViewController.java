@@ -31,8 +31,8 @@ public class SessionViewController implements Initializable {
         this.viewModel = viewModel;
         dniInputViewController.setViewModel(viewModel.getDniInputViewModel());
         professorViewController.setSessionViewModel(viewModel);
-        viewModel.addOnSessionStartedListener(() -> startSession());
-        viewModel.setOnProfessorNotFoundListener(() -> dniInputViewController.showError());
+        viewModel.addOnSessionStartedListener(this::startSession);
+        viewModel.setOnProfessorNotFoundListener(dniInputViewController::showError);
         viewModel.setOnProfessorToReplaceChangedListener(() -> showProfessorToReplace(viewModel.getProfessorToReplace()));
     }
 

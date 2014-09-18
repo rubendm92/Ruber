@@ -28,4 +28,8 @@ public class TeachingViewModel extends SelectableItemViewModel {
     public String getClassroom() {
         return teaching.getClassroom();
     }
+
+    public String getGroup() {
+        return teaching.getGroup();
+    }
 }

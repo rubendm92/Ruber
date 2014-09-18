@@ -1,13 +1,9 @@
 package ruber.signatureapp.viewmodels;
 
-import ruber.core.model.Notification;
 import ruber.core.model.Professor;
-import ruber.core.model.Signature;
 import ruber.core.model.TeachingList;
 import ruber.signatureapp.viewmodels.utils.Listener;
 import ruber.signatureapp.views.Command;
-
-import java.time.LocalTime;
 
 public class RuberFrameViewModel {
 
@@ -27,8 +23,8 @@ public class RuberFrameViewModel {
 
     private void addListeners() {
         session.addOnSessionStartedListener(() -> showTeachingsFor(session.getProfessor().getModel()));
-        session.setOnWriteNotificationListener(() -> selection.writeNotification());
-        selection.setOnProfessorSelectedListener(() -> showProfessorToReplace());
+        session.setOnWriteNotificationListener(selection::writeNotification);
+        selection.setOnProfessorSelectedListener(this::showProfessorToReplace);
     }
 
     public void clear() {

@@ -10,9 +10,7 @@
     <StackPane id="signaturePanel">
         <Canvas visible="false" fx:id="canvas" height="200" width="250"/>
         <ImageView fx:id="tabletImage">
-            <image>
-                <Image url="@sign.jpg"/>
-            </image>
+            <Image url="@sign.jpg"/>
         </ImageView>
     </StackPane>
 </VBox>

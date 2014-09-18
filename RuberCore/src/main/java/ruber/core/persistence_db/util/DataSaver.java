@@ -11,7 +11,7 @@ public abstract class DataSaver {
     
     private PreparedStatement statement;
 
-    public DataSaver(Database database) {
+    protected DataSaver(Database database) {
         this.database = database;
     }
     

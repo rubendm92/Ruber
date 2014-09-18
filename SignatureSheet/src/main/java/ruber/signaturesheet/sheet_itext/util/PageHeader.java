@@ -10,10 +10,12 @@ public class PageHeader extends PdfPageEventHelper {
 
     private static final String HEADER_IMAGE = "images/header.png";
     private final String degree;
+    private final LocalDate date;
     private PdfTemplate total;
 
-    public PageHeader(String degree) {
+    public PageHeader(String degree, LocalDate date) {
         this.degree = degree;
+        this.date = date;
     }
 
     @Override
@@ -72,7 +74,7 @@ public class PageHeader extends PdfPageEventHelper {
     }
 
     private String date() {
-        String[] date = LocalDate.now().toString().split("-");
-        return date[2] + "/" + date[1] + "/" + date[0];
+        String[] dateSplit = date.toString().split("-");
+        return dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
     }
 }

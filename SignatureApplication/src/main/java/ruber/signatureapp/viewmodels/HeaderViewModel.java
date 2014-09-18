@@ -18,8 +18,8 @@ public class HeaderViewModel extends Observable {
 
     public HeaderViewModel(String school) {
         this.school = school;
-        new Timer(ONE_MINUTE, () -> notifyChanges()).start();
-        new Timer(ONE_DAY, () -> notifyChanges()).start();
+        new Timer(ONE_MINUTE, this::notifyChanges).start();
+        new Timer(ONE_DAY, this::notifyChanges).start();
     }
 
     public String getSchool() {

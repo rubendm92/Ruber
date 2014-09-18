@@ -13,7 +13,7 @@ public abstract class DataLoader<Type> {
     private PreparedStatement statement;
     private ResultSet set;
 
-    public DataLoader(Database database) {
+    protected DataLoader(Database database) {
         this.database = database;
     }
 

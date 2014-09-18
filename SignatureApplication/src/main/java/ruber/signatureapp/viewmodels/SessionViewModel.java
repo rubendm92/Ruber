@@ -51,7 +51,8 @@ public class SessionViewModel implements Observer {
 
     private void startSessionForProfessor(Professor professor) {
         this.professor = new ProfessorViewModel(professor);
-        onSessionStartedListeners.forEach(listener -> listener.execute());
+        professorToReplace = null;
+        onSessionStartedListeners.forEach(Listener::execute);
     }
 
     public void close() {
@@ -59,7 +60,6 @@ public class SessionViewModel implements Observer {
         dniInput.clear();
         if (onSessionClosedListener != null)
             onSessionClosedListener.execute();
-        professor = null;
     }
 
     public void setOnSessionClosedListener(Listener onSessionClosedListener) {

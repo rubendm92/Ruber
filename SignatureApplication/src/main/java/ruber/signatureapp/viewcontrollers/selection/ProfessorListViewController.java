@@ -39,7 +39,7 @@ public class ProfessorListViewController implements Initializable {
     private void createViews() {
         professorViews = new ArrayList<>();
         professorViewControllers = new ArrayList<>();
-        professorViewModels.forEach(professor -> addProfessor(professor));
+        professorViewModels.forEach(this::addProfessor);
     }
 
     private void addProfessor(ProfessorViewModel professor) {

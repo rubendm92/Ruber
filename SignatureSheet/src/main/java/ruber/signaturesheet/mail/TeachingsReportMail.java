@@ -17,17 +17,17 @@ import java.util.List;
 
 public class TeachingsReportMail extends MailSender{
 
-    private static final String SUBJECT = "Informe de docencia del " + today();
-
     private final List<File> files;
+    private final LocalDate date;
 
-    public TeachingsReportMail(List<File> files) {
+    public TeachingsReportMail(List<File> files, LocalDate date) {
         super();
         this.files = files;
+        this.date = date;
     }
 
     public void sendReport(TeachingList teachings, String recipientAddress) {
-        send(new Mail(recipientAddress, SUBJECT, content(teachings)));
+        send(new Mail(recipientAddress, "Informe de docencia del " + today(), content(teachings)));
     }
 
     private String content(TeachingList teachings) {
@@ -64,12 +64,12 @@ public class TeachingsReportMail extends MailSender{
         }};
     }
 
-    private static String today() {
-        String[] date = LocalDate.now().toString().split("-");
-        return date[2] + " de " + month(date[1]) + " del " + date[0];
+    private String today() {
+        String[] dateSplit = date.toString().split("-");
+        return dateSplit[2] + " de " + month(dateSplit[1]) + " del " + dateSplit[0];
     }
 
-    private static String month(String monthNumber) {
+    private String month(String monthNumber) {
         switch (monthNumber) {
             case "01": return "enero";
             case "02": return "febrero";

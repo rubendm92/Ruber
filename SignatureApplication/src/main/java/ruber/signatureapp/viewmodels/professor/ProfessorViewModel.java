@@ -38,7 +38,10 @@ public class ProfessorViewModel extends SelectableItemViewModel {
 
     @Override
     public boolean equals(Object object) {
-        if (object == null || object.getClass() != getClass()) return false;
-        return professor.equals(((ProfessorViewModel) object).getModel());
+        return isProfessorViewModel(object) && professor.equals(((ProfessorViewModel) object).getModel());
+    }
+
+    private boolean isProfessorViewModel(Object object) {
+        return (object != null && getClass() == object.getClass());
     }
 }

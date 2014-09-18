@@ -21,7 +21,7 @@ public abstract class MailSender {
     private String password;
     private final Session session;
 
-    public MailSender() {
+    protected MailSender() {
         readUserAndPassword();
         session = Session.getInstance(properties(), authenticator());
     }
@@ -56,8 +56,8 @@ public abstract class MailSender {
         return new Properties() {{
             put("mail.smtp.auth", "true");
             put("mail.smtp.starttls.enable", "true");
-            put("mail.smtp.host", "smtp.gmail.com");
-            put("mail.smtp.port", "587");
+            put("mail.smtp.host", "correo.dis.ulpgc.es");
+            put("mail.smtp.port", "25");
         }};
     }
 
@@ -80,8 +80,9 @@ public abstract class MailSender {
 
     protected Message message(Mail mail) throws MessagingException {
         return new MimeMessage(session) { {
-            setFrom(new InternetAddress(username));
+            setFrom(new InternetAddress(username + "@eii.ulpgc.es"));
             setRecipient(Message.RecipientType.TO, new InternetAddress(mail.getRecipient()));
+            setRecipient(Message.RecipientType.BCC, new InternetAddress(username + "@eii.ulpgc.es"));
             setSubject(mail.getSubject());
             setText(mail.getMessage());
         }};

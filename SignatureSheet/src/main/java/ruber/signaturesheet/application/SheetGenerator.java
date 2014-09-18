@@ -16,6 +16,7 @@ public class SheetGenerator {
 
     private TeachingList teachings;
     private ProfessorList professors;
+    private final LocalDate date = LocalDate.now();
 
     public static void main(String[] args) {
         new SheetGenerator().start(Arrays.asList(args));
@@ -23,17 +24,17 @@ public class SheetGenerator {
 
     private void start(List<String> recipientAddress) {
         PersistenceProvider provider = new DatabasePersistenceProvider("config/database.xml");
-        teachings = provider.getTeachingsLoader().load(LocalDate.now());
+        teachings = provider.getTeachingsLoader().load(date);
         professors = provider.getProfessorsLoader().load();
         sendReportWithPdfs(generatePdfsWithSignaturesByDegrees(), recipientAddress);
     }
 
     private void sendReportWithPdfs(List<File> files, List<String> recipientAddress) {
-        recipientAddress.forEach(address -> new TeachingsReportMail(files).sendReport(teachings, address));
+        recipientAddress.forEach(address -> new TeachingsReportMail(files, date).sendReport(teachings, address));
         files.forEach(File::delete);
     }
 
     private List<File> generatePdfsWithSignaturesByDegrees() {
-        return new ItextSignatureSheetGenerator().generate(teachings, professors);
+        return new ItextSignatureSheetGenerator(date).generate(teachings, professors);
     }
 }

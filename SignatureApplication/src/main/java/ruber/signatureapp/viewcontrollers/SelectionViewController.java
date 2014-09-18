@@ -4,12 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import ruber.core.model.Notification;
-import ruber.core.model.Signature;
 import ruber.signatureapp.viewcontrollers.selection.NotificationsViewController;
 import ruber.signatureapp.viewcontrollers.selection.ProfessorListPanelViewController;
 import ruber.signatureapp.viewcontrollers.selection.TeachingListViewController;
-import ruber.signatureapp.viewmodels.professor.ProfessorListViewModel;
 import ruber.signatureapp.viewmodels.SelectionViewModel;
+import ruber.signatureapp.viewmodels.professor.ProfessorListViewModel;
 import ruber.signatureapp.viewmodels.teaching.TeachingListViewModel;
 
 import java.net.URL;
@@ -44,8 +43,8 @@ public class SelectionViewController implements Initializable {
     private void setListeners() {
         viewModel.setOnTeachingsChangedListener(() -> showTeachings(viewModel.getTeachings()));
         viewModel.setOnProfessorsChangedListener(() -> showProfessors(viewModel.getProfessors()));
-        viewModel.setOnWriteNotificationListener(() -> writeNotification());
-        viewModel.setOnClearListener(() -> clear());
+        viewModel.setOnWriteNotificationListener(this::writeNotification);
+        viewModel.setOnClearListener(this::clear);
     }
 
     private void writeNotification() {
@@ -59,7 +58,7 @@ public class SelectionViewController implements Initializable {
         professorListView.setVisible(true);
         professorListViewController.setViewModel(professors);
         professorListViewController.showProfessors();
-        professors.setOnProfessorSelectedListener(() -> viewModel.showProfessorToReplace());
+        professors.setOnProfessorSelectedListener(viewModel::showProfessorToReplace);
     }
 
     private void clear() {
@@ -104,5 +103,9 @@ public class SelectionViewController implements Initializable {
 
     public boolean hasNotificationUnsaved() {
         return (notificationsView.isVisible() && notificationsViewController.hasNotification());
+    }
+
+    public void signing() {
+        teachingListViewController.signing();
     }
 }
