@@ -67,9 +67,13 @@ public class SelectionViewModel {
 
     public void showProfessorsToReplace() {
         professors.clear();
-        teachings.getProfessorsWithTeachingsForTime(LocalTime.now()).forEach(professor -> professors.add(new ProfessorViewModel(professor)));
+        professorWithTeachingsNow().forEach(professor -> professors.add(new ProfessorViewModel(professor)));
         if (onProfessorsChangedListener != null)
             onProfessorsChangedListener.execute();
+    }
+
+    private Stream<Professor> professorWithTeachingsNow() {
+        return teachings.getProfessorsWithTeachingsForTime(LocalTime.now()).stream().filter(professor -> !professor.equals(currentProfessor));
     }
 
     public ProfessorViewModel getProfessorToReplace() {

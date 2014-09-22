@@ -31,7 +31,7 @@ import java.util.List;
 
 public class SignatureApplication extends Application {
 
-    private static final int ONE_MINUTE = 30 * 1000;
+    private static final int HALF_MINUTE = 30 * 1000;
     private static final String CONFIG_FILE = "config/database.xml";
     private static final String FRAME_VIEW = "/ruber/signatureapp/views/RuberFrameView.fxml";
 
@@ -97,7 +97,7 @@ public class SignatureApplication extends Application {
         primaryStage.setScene(scene);
         Command command = new ClearFrameCommand(frameViewController, provider);
         frameViewModel.addOnSessionClosedListener(command::execute);
-        final Timer timer = new Timer(ONE_MINUTE, () -> Platform.runLater(command::execute));
+        final Timer timer = new Timer(HALF_MINUTE, () -> Platform.runLater(command::execute));
         primaryStage.addEventFilter(Event.ANY, event -> timer.restart());
         primaryStage.setOnCloseRequest(event -> closeApplication());
         primaryStage.show();
