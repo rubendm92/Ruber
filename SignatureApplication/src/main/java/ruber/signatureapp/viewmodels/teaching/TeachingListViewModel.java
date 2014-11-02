@@ -4,6 +4,7 @@ import ruber.signatureapp.signaturedevices.SignatureViewModel;
 import ruber.signatureapp.viewmodels.utils.Listener;
 import ruber.signatureapp.viewmodels.utils.SelectableItemViewModel;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TeachingListViewModel extends ArrayList<TeachingViewModel> {
@@ -18,7 +19,7 @@ public class TeachingListViewModel extends ArrayList<TeachingViewModel> {
     @Override
     public boolean add(TeachingViewModel teachingViewModel) {
         boolean result = super.add(teachingViewModel);
-        get(0).select();
+        stream().filter(teaching -> teaching.getModel().canBeSigned(LocalTime.now())).forEach(SelectableItemViewModel::select);
         return result;
     }
 
