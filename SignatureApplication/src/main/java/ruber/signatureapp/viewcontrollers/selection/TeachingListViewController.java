@@ -48,7 +48,7 @@ public class TeachingListViewController implements Initializable, Observer {
         restartComponents();
         teachings.forEach(this::addTeaching);
         replacementButton.setVisible(true);
-        signatureEnabled();
+        changed();
     }
 
     private void addTeaching(TeachingViewModel teachingViewModel) {
