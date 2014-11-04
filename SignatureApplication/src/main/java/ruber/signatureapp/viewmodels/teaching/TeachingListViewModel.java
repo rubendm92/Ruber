@@ -15,6 +15,13 @@ public class TeachingListViewModel extends ArrayList<TeachingViewModel> {
         this.signatureViewModel = signatureViewModel;
     }
 
+    @Override
+    public boolean add(TeachingViewModel teachingViewModel) {
+        boolean result = super.add(teachingViewModel);
+        get(0).select();
+        return result;
+    }
+
     public SignatureViewModel getSignatureViewModel() {
         return signatureViewModel;
     }

@@ -55,7 +55,7 @@ public class SignatureApplication extends Application {
     private void startApplication(Stage primaryStage) throws IOException {
         provider = new DatabasePersistenceProvider(CONFIG_FILE);
         FXMLLoader loader = new FXMLLoader(getClass().getResource(FRAME_VIEW));
-        Scene scene = new Scene(loader.load());
+        Scene scene = new Scene(loader.load(), 1280, 1024);
         frameViewController = loader.getController();
         createFrameViewModel();
         frameViewController.setViewModel(frameViewModel);
@@ -93,7 +93,7 @@ public class SignatureApplication extends Application {
     }
 
     private void setUpStage(Stage primaryStage, Scene scene) {
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
         Command command = new ClearFrameCommand(frameViewController, provider);
         frameViewModel.addOnSessionClosedListener(command::execute);

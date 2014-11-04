@@ -28,7 +28,7 @@ public class ProfessorSetter extends DataLoader<Void> {
     protected String statement() {
         return "SELECT Profesores.Profesor, DNI, Correo " +
                 "FROM `Profesores`, `Horario` " +
-                "WHERE `Periodo` = ? AND `DiaSemana`= ? AND `Titulacion` = ? AND `DescAsignatura` = ? AND `DescGrupo` = ? AND `Horario` = ? AND `DescLocal` = ? AND `Profesores`.`Profesor` = `Horario`.`Profesor` " +
+                "WHERE (`Periodo` = 'Anual' || `Periodo` = ?) AND `DiaSemana`= ? AND `Titulacion` = ? AND `DescAsignatura` = ? AND `DescGrupo` = ? AND `Horario` = ? AND `DescLocal` = ? AND `Profesores`.`Profesor` = `Horario`.`Profesor` " +
                 "ORDER BY `Horario`";
     }
 

@@ -20,7 +20,9 @@ import java.util.List;
 
 public class WacomSTU500 implements SignatureViewModel {
 
-    private static final String PATH_TO_DLL = "C:\\Program Files\\Wacom STU SDK\\Java\\jar\\Win32";
+    public static final String PRODUCTION_PATH = "C:\\Program Files\\Wacom STU SDK\\Java\\jar\\Win32";
+    public static final String TEST_PATH = "C:\\Program Files (x86)\\Wacom STU SDK\\Java\\jar\\x64";
+    private static final String PATH_TO_DLL = PRODUCTION_PATH;
 
     private Tablet tablet;
     private Capability capability;

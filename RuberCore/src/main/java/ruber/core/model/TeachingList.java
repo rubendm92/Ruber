@@ -10,7 +10,7 @@ public class TeachingList extends ArrayList<Teaching> {
 
     public TeachingList getCurrentTeachingsForProfessor(Professor professor) {
         TeachingList list = new TeachingList();
-        teachingsThatCanBeSigned(LocalTime.now()).filter(teaching -> teaching.isGivenBy(professor)).forEach(list::add);
+        stream().filter(teaching -> teaching.isGivenBy(professor)).forEach(list::add);
         return list;
     }
 
@@ -22,7 +22,7 @@ public class TeachingList extends ArrayList<Teaching> {
 
     public ProfessorList getProfessorsWithTeachingsForTime(LocalTime time) {
         ProfessorList professors = new ProfessorList();
-        teachingsThatCanBeSigned(time).forEach((teaching) -> addProfessors(professors, teaching));
+        forEach((teaching) -> addProfessors(professors, teaching));
         professors.sort((professor1, professor2) -> professor1.getName().compareTo(professor2.getName()));
         return professors;
     }
@@ -32,10 +32,6 @@ public class TeachingList extends ArrayList<Teaching> {
             if (professors.contains(professor)) continue;
             professors.add(professor);
         }
-    }
-
-    private Stream<Teaching> teachingsThatCanBeSigned(LocalTime time) {
-        return stream().filter((teaching) -> teaching.canBeSigned(time));
     }
 
     public Map<String, TeachingList> getByDegree() {

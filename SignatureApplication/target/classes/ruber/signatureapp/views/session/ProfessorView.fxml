@@ -22,7 +22,7 @@
         <VBox alignment="CENTER">
             <Separator />
             <VBox alignment="CENTER" fx:id="sendNotificationPanel">
-                <Label alignment="CENTER">Enviar notificación</Label>
+                <Label alignment="CENTER">Notificar incidencia</Label>
             </VBox>
             <Separator />
             <VBox alignment="CENTER" fx:id="closeSessionPanel">

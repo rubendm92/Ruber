@@ -5,6 +5,7 @@ import java.time.LocalTime;
 public class Schedule {
 
     private static final int ONE_HOUR = 60 * 60;
+    private static final int FIFTEEN_MINUTES = 60 * 15;
 
     private final LocalTime startTime;
     private final LocalTime endTime;
@@ -47,18 +48,18 @@ public class Schedule {
     }
 
     public boolean canBeSigned(LocalTime time) {
-        return oneHourBeforeStart(time) || betweenSchedule(time) ||oneHourAfterEnd(time);
+        return beforeStart(time) || betweenSchedule(time) || afterEnd(time);
     }
 
-    private boolean oneHourBeforeStart(LocalTime time) {
-        return (Math.abs(startTime.toSecondOfDay() - time.toSecondOfDay()) <= ONE_HOUR);
+    private boolean beforeStart(LocalTime time) {
+        return (Math.abs(startTime.toSecondOfDay() - time.toSecondOfDay()) <= (ONE_HOUR + FIFTEEN_MINUTES));
     }
 
     private boolean betweenSchedule(LocalTime time) {
         return time.isAfter(startTime) && time.isBefore(endTime);
     }
 
-    private boolean oneHourAfterEnd(LocalTime time) {
-        return (Math.abs(endTime.toSecondOfDay() - time.toSecondOfDay()) <= ONE_HOUR);
+    private boolean afterEnd(LocalTime time) {
+        return (Math.abs(endTime.toSecondOfDay() - time.toSecondOfDay()) <= (ONE_HOUR + FIFTEEN_MINUTES));
     }
 }

@@ -104,8 +104,4 @@ public class SelectionViewController implements Initializable {
     public boolean hasNotificationUnsaved() {
         return (notificationsView.isVisible() && notificationsViewController.hasNotification());
     }
-
-    public void signing() {
-        teachingListViewController.signing();
-    }
 }

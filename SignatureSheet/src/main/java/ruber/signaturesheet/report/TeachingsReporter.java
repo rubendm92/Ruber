@@ -51,14 +51,17 @@ public class TeachingsReporter {
 
     private void addUnsignedTeaching(Teaching teaching) {
         unsignedTeachings += "- " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + teaching.getGroup() + ", " + teaching.getDegree() + "\n";
+        teaching.getProfessors().forEach(professor -> unsignedTeachings += "\t" + professor.getName() + "\n");
     }
 
     private void checkProfessorsThatDidNotSigned() {
-        for (Teaching teaching : teachings)
+        for (Teaching teaching : teachings) {
+            if (!teaching.isSigned()) continue;
             teaching.getSignatures().entrySet().forEach(entry -> {
                 if (entry.getValue() == null)
                     professorsThatDidNotSigned += "- " + entry.getKey().getName() + ", " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + teaching.getGroup() + ", " + teaching.getDegree() + "\n";
             });
+        }
         if (professorsThatDidNotSigned.isEmpty())
             professorsThatDidNotSigned = "Todos los profesores firmaron";
         else
@@ -70,22 +73,23 @@ public class TeachingsReporter {
             for (Map.Entry<Professor,Signature> professorSignatureEntry : teaching.getSignatures().entrySet()) {
                 if (professorSignatureEntry.getValue() == null) continue;
                 if (professorSignatureEntry.getKey().equals(professorSignatureEntry.getValue().getProfessor())) continue;
-                if (replacements.contains(replacement(professorSignatureEntry))) continue;
-                replacements += "- " + replacement(professorSignatureEntry) + "\n";
+                replacements += replacement(teaching, professorSignatureEntry) + "\n";
             }
         }
         if (!replacements.equals(""))
             replacements = "Sustituciones:\n" + replacements;
     }
 
-    private String replacement(Map.Entry<Professor, Signature> professorSignatureEntry) {
-        return professorSignatureEntry.getKey().getName() + " sustituido por " + professorSignatureEntry.getValue().getProfessor().getName();
+    private String replacement(Teaching teaching, Map.Entry<Professor, Signature> professorSignatureEntry) {
+        String replacement = "- " + teaching.getSubjectName() + ", " + teaching.getStringSchedule() + ", " + teaching.getGroup() + ", " + teaching.getDegree() + "\n";
+        replacement += "\t" + professorSignatureEntry.getKey().getName() + " sustituido por " + professorSignatureEntry.getValue().getProfessor().getName();
+        return replacement;
     }
 
     private String report() {
         return numberOfTeachingsSigned +
-                (unsignedTeachings.equals("") ? "" : "\n\n" + unsignedTeachings) +
+                (unsignedTeachings.isEmpty() ? "" : "\n\n" + unsignedTeachings) +
                 "\n\n" + professorsThatDidNotSigned +
-                (replacements.equals("") ? "" : "\n\n" + replacements);
+                (replacements.isEmpty() ? "" : "\n\n" + replacements);
     }
 }

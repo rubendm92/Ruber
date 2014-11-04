@@ -7,8 +7,6 @@ import ruber.core.model.Professor;
 import ruber.core.model.Signature;
 import ruber.core.model.TeachingList;
 import ruber.core.persistence.SignedTeachingsSaver;
-import ruber.core.persistence_file.FileSignedTeachingsSaver;
-import ruber.signatureapp.model.Timer;
 import ruber.signatureapp.viewcontrollers.RuberFrameViewController;
 import ruber.signatureapp.views.Command;
 
@@ -28,11 +26,10 @@ public class SignTeachingsCommand implements Command {
 
     @Override
     public void execute() {
-        Platform.runLater(() -> sign());
+        Platform.runLater(this::sign);
     }
 
     private void sign() {
-        frame.signing();
         final TeachingList teachings = frame.getSelectedTeachings();
         final Professor professor = frame.getProfessorFromSession();
         final Professor selectedProfessor = frame.getSelectedProfessor();
@@ -43,7 +40,6 @@ public class SignTeachingsCommand implements Command {
 
     private void process(TeachingList teachings, Professor professor, Professor selectedProfessor, Signature signature) {
         teachings.forEach(teaching -> teaching.sign(selectedProfessor, signature));
-        FileSignedTeachingsSaver.getInstance().save(professor, teachings);
         remoteSave(teachings, professor);
 
     }

@@ -99,8 +99,4 @@ public class RuberFrameViewController implements Initializable {
     public boolean hasNotificationUnsaved() {
         return selectionViewController.hasNotificationUnsaved();
     }
-
-    public void signing() {
-        selectionViewController.signing();
-    }
 }

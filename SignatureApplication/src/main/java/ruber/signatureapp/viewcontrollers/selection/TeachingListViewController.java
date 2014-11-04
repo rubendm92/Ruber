@@ -122,10 +122,4 @@ public class TeachingListViewController implements Initializable, Observer {
         if (signatureViewController != null)
             signatureViewController.disconnect();
     }
-
-    public void signing() {
-        replacementButton.setVisible(false);
-        teachingMessage.setVisible(true);
-        teachingMessage.setText("Firmando su docencia...");
-    }
 }

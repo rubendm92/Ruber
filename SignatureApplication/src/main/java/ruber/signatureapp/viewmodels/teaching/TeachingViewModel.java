@@ -9,7 +9,6 @@ public class TeachingViewModel extends SelectableItemViewModel {
 
     public TeachingViewModel(Teaching teaching) {
         super();
-        select();
         this.teaching = teaching;
     }
 
